@@ -1,0 +1,322 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap');
+:root {
+  --background:#cfe1f4;
+  --ink:#101113;
+  --teal:#137d78;
+  --teal-deep:#086a68;
+  --mint:#b8d8cc;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth;scroll-padding-top:calc(var(--site-header-height, 132px) + 14px);}
+body {margin:0;min-width:1440px;background:var(--background);color:var(--ink);font-family:'Shippori Antique','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;font-size:calc(20px * var(--text-scale, 1));font-weight:400;line-height:1.5;}
+a {color:inherit;text-decoration:none}
+a:hover,a:focus-visible {opacity:.7}
+img {display:block;max-width:100%}
+h1,h2,h3,h4,p,ul {margin-top:0}
+h1,h2,h3 {font-weight:800}
+:root {--header-blue:#3e78bb;--text-scale:1;}
+.site-header {position:sticky;top:0;z-index:200;width:100%;margin:0 auto;background:#fff;}
+.site-top {max-width:1440px;min-height:84px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr) max-content;align-items:center;gap:24px;padding:8px 78px;}
+.site-brand {display:flex;flex-direction:column;align-items:center;gap:8px;width:220px;flex-shrink:0;}
+.site-logo {width:220px;display:block;}
+.site-logo img {width:220px;height:66px;object-fit:contain;object-position:left center;}
+.site-phone {display:inline-flex;align-items:center;justify-content:flex-end;gap:10px;font-family:inherit;font-size:calc(26px * var(--text-scale, 1));font-weight:700;line-height:1.3;letter-spacing:.02em;color:#303943;white-space:nowrap;}
+.site-phone svg {width:30px;height:30px;padding:7px;border-radius:50%;background:var(--header-blue);color:#fff;flex-shrink:0;fill:currentColor;}
+.header-contact {display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+.header-reception {display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;column-gap:8px;row-gap:2px;margin:0;font-size:calc(12px * var(--text-scale, 1));line-height:1.6;color:#414b57;}
+.header-reception span {white-space:nowrap;}
+.header-reception span:first-child {font-weight:700;}
+.header-utilities {display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+.text-size-control {display:flex;align-items:center;gap:10px;font-size:calc(14px * var(--text-scale, 1));color:#414141;}
+.text-size-buttons {display:flex;}
+.text-size-button {border:1px solid #dce2e9;background:#f0f2f5;color:#414141;padding:5px 13px;font:inherit;line-height:1.3;cursor:pointer;}
+.text-size-button:first-child {border-radius:4px 0 0 4px;}
+.text-size-button:last-child {border-radius:0 4px 4px 0;}
+.text-size-button[aria-pressed="true"] {background:var(--header-blue);border-color:var(--header-blue);color:#fff;}
+.utility-nav {display:flex;align-items:center;justify-content:center;gap:18px;font-size:calc(14px * var(--text-scale, 1));font-weight:500;}
+.utility-nav a {display:inline-flex;align-items:center;gap:8px;white-space:nowrap;}
+.utility-icon {display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--header-blue);color:#fff;}
+.utility-icon svg {width:16px;height:16px;fill:currentColor;}
+.utility-icon-question {font-family:inherit;font-size:calc(20px * var(--text-scale, 1));font-weight:700;}
+.site-header a:focus-visible,.text-size-button:focus-visible {outline:3px solid var(--header-blue);outline-offset:4px;}
+.global-nav {min-height:48px;display:flex;align-items:stretch;width:100%;padding:0 max(30px,calc((100% - 1284px) / 2));background:var(--header-blue);color:#fff;box-shadow:0 3px 6px rgba(30,65,105,.15);}
+.global-nav a {display:flex;align-items:center;justify-content:center;white-space:nowrap;font-family:'Yu Mincho','Hiragino Mincho ProN','Hiragino Mincho Pro','Noto Serif JP',serif;font-size:calc(16px * var(--text-scale, 1));font-weight:400;line-height:1.5;padding:12px;flex:1;border-right:1px solid rgba(255,255,255,.35);}
+.global-nav a:first-child {border-left:1px solid rgba(255,255,255,.35);}
+.global-nav a:hover,.global-nav a:focus-visible {background:#2f649f;opacity:1;}
+.global-nav a:nth-child(2){flex:1.15}
+.global-nav a:nth-child(3){flex:1.15}
+.global-nav a:nth-child(4){flex:1.25}
+.global-nav a:nth-child(5){flex:1.65}
+.global-nav a:nth-child(6){flex:1.3}
+.global-nav a[aria-current="page"] {background:#3269a8;text-decoration:none;}
+.page-main {width:1440px;margin:0 auto;}
+.page-title {text-align:center;font-size:calc(59px * var(--text-scale, 1));line-height:1.25;letter-spacing:.01em;margin:126px 0 86px;}
+.page-content {width:1000px;margin:0 auto;font-size:calc(20px * var(--text-scale, 1));}
+.page-content p {line-height:1.5}
+/* お知らせ */
+.news-content {width:1200px;}
+.news-article {display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:40px;align-items:center;margin-bottom:36px;padding:32px;background:#fff;}
+.news-article h2 {font-size:calc(26px * var(--text-scale, 1));line-height:1.5;margin:0 0 24px;}
+.news-article-photo {width:400px;height:auto;border-radius:12px;}
+.news-article-photo--people {height:333px;object-fit:cover;object-position:right center;}
+.news-article-photo--left {object-position:left center;}
+.news-article p {font-size:calc(19px * var(--text-scale, 1));line-height:1.4;margin:0 0 18px}
+.news-article p+p {margin-top:13px}
+.section-photo {width:760px;height:430px;object-fit:cover;margin-left:auto;margin-right:auto;}
+.news-photo {margin-top:132px;}
+/* 診療内容 */
+.medical-content {width:1200px;}
+.medical-intro {margin-bottom:56px;}
+.medical-intro p {margin-bottom:21px}
+.medical-entry {display:grid;grid-template-columns:minmax(0,1fr) 540px;gap:60px;align-items:center;padding:40px;margin-bottom:48px;background:#fff;}
+.medical-entry h2 {font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(28px * var(--text-scale, 1));line-height:1.5;margin-bottom:24px;color:#23466c;}
+.medical-entry p {font-size:calc(18px * var(--text-scale, 1));margin-bottom:18px;line-height:1.9;}
+.medical-entry-text p:last-child {margin-bottom:0;}
+.medical-entry-photo {width:540px;height:auto;border-radius:14px;}
+.home-medical-photo-frame {width:540px;aspect-ratio:7 / 4;overflow:hidden;border-radius:14px;}
+.home-medical .medical-entry-photo--people {height:100%;object-fit:cover;object-position:right top;transform:scale(1.45);transform-origin:right top;}
+.medical-photo-frame {width:540px;height:450px;overflow:hidden;border-radius:14px;}
+.medical-photo-frame .medical-entry-photo {width:100%;height:100%;object-fit:cover;object-position:left center;border-radius:0;}
+.medical-photo-frame--3 .medical-entry-photo {object-position:left bottom;transform:scale(1.3);transform-origin:left bottom;}
+.medical-photo-frame--6 .medical-entry-photo {object-position:right center;}
+/* 当院について */
+.about-content {width:1200px;counter-reset:about-feature;}
+.about-intro,.about-block {display:grid;grid-template-columns:minmax(0,1fr) 540px;gap:60px;align-items:center;margin:0 0 72px;padding:40px;background:#fff;border-radius:4px;}
+.about-intro p {margin-bottom:18px;}
+.about-block {counter-increment:about-feature;}
+.about-block .about-text::before {content:counter(about-feature,decimal-leading-zero);display:block;margin-bottom:12px;color:var(--header-blue);font-family:Georgia,serif;font-size:calc(28px * var(--text-scale, 1));}
+.about-block h2 {font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(30px * var(--text-scale, 1));line-height:1.5;margin-bottom:24px;}
+.about-block p,.about-intro p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin-bottom:18px;}
+.about-text > :last-child {margin-bottom:0;}
+.about-feature-photo {width:540px;height:auto;border-radius:14px;}
+.about-feature-photo--people {height:450px;object-fit:cover;object-position:right center;}
+.page-about :is(.about-intro,.about-block,.photo-gallery).is-revealed {animation:about-float-in 1.8s ease-out both;}
+@keyframes about-float-in {from {opacity:0;transform:translateY(36px);} to {opacity:1;transform:translateY(0);}}
+.page-medical :is(.medical-entry,.clinical-gallery figure).is-revealed {animation:about-float-in 1.5s ease-out both;}
+@media (prefers-reduced-motion:reduce) {.page-medical :is(.medical-entry,.clinical-gallery figure).is-revealed {animation:none;}}
+.page-about .staff-card.is-revealed {animation:staff-slide-in 3s ease-in-out both;}
+.home-staff .staff-card.is-revealed {animation:staff-slide-in 3s ease-in-out both;}
+@keyframes staff-slide-in {from {opacity:.45;transform:translateX(100px);} to {opacity:1;transform:translateX(0);}}
+@media (prefers-reduced-motion:reduce) {.page-about :is(.about-intro,.about-block,.staff-card,.photo-gallery).is-revealed,.home-staff .staff-card.is-revealed {animation:none;}}
+.about-block ul {padding-left:26px;margin:8px 0 20px}
+.about-policy-list {padding-left:26px}
+.about-policy-list li {font-size:calc(18px * var(--text-scale, 1));line-height:1.8;margin:0 0 13px;}
+.about-exterior {margin-top:74px}
+.staff-section {width:1200px;margin:125px auto 0;text-align:left}
+.staff-section h2 {font-size:calc(52px * var(--text-scale, 1));text-align:center;margin-bottom:28px}
+.staff-lead {font-size:calc(20px * var(--text-scale, 1));max-width:720px;margin:0 auto 60px;line-height:1.55}
+.staff-card {display:grid;grid-template-columns:480px minmax(0,1fr);gap:48px;align-items:start;width:100%;margin:0 auto 64px;}
+.staff-card img {width:480px;height:520px;object-fit:cover;object-position:center;margin:0;}
+.staff-card img[alt*="佐藤 太郎"] {object-position:90% center;}
+.staff-card img[alt*="鈴木 真理"] {object-position:94% center;}
+.staff-card img[alt*="高橋 由美"] {object-position:47% center;}
+.staff-card img[alt*="山本 花"] {object-position:left center;}
+.staff-details {min-height:274px;padding:36px 38px;background:#fff;box-shadow:0 3px 18px rgba(36,63,86,.13);color:#30383d;}
+.staff-card h3 {font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(28px * var(--text-scale, 1));line-height:1.5;margin:0 0 22px;padding-bottom:16px;border-bottom:1px solid var(--header-blue);}
+.staff-card p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin-bottom:18px;}
+.staff-details p:last-child {margin-bottom:0;}
+/* FAQ */
+.page-faq .page-main {background:#fff;}
+.page-banner {height:300px;position:relative;overflow:hidden;background:#eef5fb;}
+.page-banner img {width:100%;height:100%;object-fit:cover;object-position:center 38%;}
+.page-banner::after {content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.95) 25%,rgba(255,255,255,.25) 65%,rgba(255,255,255,0));}
+.page-banner .page-title {position:absolute;left:120px;top:56px;z-index:1;margin:0;font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(44px * var(--text-scale, 1));font-weight:500;text-align:left;}
+.page-breadcrumb {display:flex;gap:14px;align-items:center;width:1200px;margin:0 auto;padding:22px 0;font-size:calc(16px * var(--text-scale, 1));}
+.page-breadcrumb a {color:var(--header-blue);}
+.page-breadcrumb + :is(.news-content,.medical-content,.about-content) {padding-top:48px;}
+.faq-content {width:1200px;padding-top:48px;padding-bottom:30px;}
+.faq-intro {line-height:1.9;margin-bottom:56px;color:#485567;}
+.faq-group {margin-bottom:56px;}
+.faq-group h2 {font-size:calc(30px * var(--text-scale, 1));line-height:1.5;margin:0 0 28px;color:#23466c;border-left:6px solid var(--header-blue);padding-left:16px;}
+.faq-group-intro {display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;align-items:center;margin-bottom:24px;}
+.faq-group-intro h2 {margin-bottom:0;}
+.faq-group-photo {width:360px;height:180px;object-fit:cover;border-radius:12px;}
+.faq-group-photo--people {height:300px;object-position:right center;}
+.faq-item {margin:0 0 18px;border-radius:12px;background:#edf5fc;overflow:hidden;}
+.faq-item summary {display:grid;grid-template-columns:48px minmax(0,1fr) 36px;gap:24px;align-items:center;list-style:none;cursor:pointer;padding:28px 32px;font-size:calc(20px * var(--text-scale, 1));line-height:1.7;color:#303b49;}
+.faq-item summary::-webkit-details-marker {display:none;}
+.faq-item summary:hover {background:#e3effb;}
+.faq-item summary:focus-visible {outline:3px solid var(--header-blue);outline-offset:-4px;border-radius:12px;}
+.faq-marker {display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--header-blue);color:#fff;font-family:Georgia,serif;font-size:calc(27px * var(--text-scale, 1));}
+.faq-toggle {display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid #738395;border-radius:50%;background:#fff;}
+.faq-toggle::before {content:"+";font-family:inherit;font-size:26px;line-height:1;}
+.faq-item[open] .faq-toggle::before {content:"−";}
+.faq-answer {display:grid;grid-template-columns:48px minmax(0,1fr);gap:24px;align-items:start;margin:0 32px;padding:24px 0 28px;border-top:1px solid #cadbec;}
+.faq-answer .faq-marker {background:#fff;color:var(--header-blue);border:1px solid #cadbec;}
+.faq-answer p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin:4px 0 0;}
+/* 診療時間・所在地／共通フッター */
+.clinic-footer {width:1284px;margin:170px auto 0;padding:32px 40px 24px;background:#edf5fc;color:#303b49;}
+.clinic-columns {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 60px;align-items:stretch;}
+.clinic-hours {display:grid;grid-template-rows:subgrid;grid-column:1;grid-row:1 / span 3;min-width:0;}
+.clinic-right {display:grid;grid-template-rows:subgrid;grid-column:2;grid-row:1 / span 3;min-width:0;}
+.clinic-reservation {display:grid;grid-template-rows:subgrid;grid-row:1 / span 2;min-width:0;}
+.clinic-hours > .clinic-section-title,.clinic-reservation > .clinic-section-title {margin-bottom:0;}
+.clinic-reservation .reservation-preview {border-radius:8px;}
+.clinic-section-title {display:flex;align-items:center;gap:14px;font-size:calc(28px * var(--text-scale, 1));line-height:1.5;margin:0 0 28px;font-weight:700;}
+.clinic-section-title::before {content:"";width:18px;height:18px;flex-shrink:0;border-radius:4px;background:var(--header-blue);}
+.clinic-footer .schedule-panel {width:100%;margin:0;}
+.clinic-info-list {margin:0;}
+.clinic-info-row {display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid #d4e0ec;}
+.clinic-info-row dt {font-size:calc(18px * var(--text-scale, 1));font-weight:700;color:#23466c;}
+.clinic-info-row dd {margin:0;font-size:calc(18px * var(--text-scale, 1));line-height:1.8;}
+.clinic-contact-box {padding:26px;background:#fff;border-radius:14px;}
+.clinic-contact-box h4 {margin:0 0 18px;font-size:calc(20px * var(--text-scale, 1));}
+.clinic-contact-box p {font-size:calc(16px * var(--text-scale, 1));line-height:1.8;margin:18px 0 0;}
+.clinic-contact-line {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;margin:8px 0;background:#edf5fc;border-radius:10px;font-size:calc(17px * var(--text-scale, 1));}
+.clinic-contact-line span {color:#23466c;font-weight:700;}
+.clinic-contact-line a {font-family:inherit;font-size:calc(24px * var(--text-scale, 1));font-weight:700;white-space:nowrap;}
+.clinic-contact-line:last-of-type {flex-wrap:wrap;}
+.clinic-contact-line .clinic-email {font-size:calc(17px * var(--text-scale, 1));overflow-wrap:anywhere;white-space:normal;}
+.schedule-panel {width:620px;padding:0;background:transparent;border:0;margin:60px auto 0;}
+.schedule-inner {padding:16px 16px 21px;background:#fff;border:1px solid #d1dfed;border-radius:8px;}
+.schedule-inner h3,.reservation-head strong {border-left:7px solid var(--header-blue);padding-left:10px;font-size:calc(24px * var(--text-scale, 1));line-height:1.4;margin:0 0 11px;font-weight:800;color:#23466c;}
+.hours-table {border-collapse:collapse;table-layout:fixed;width:100%;font-size:calc(15px * var(--text-scale, 1));background:#fff;}
+.hours-table th {background:var(--header-blue);color:#fff;font-weight:600;}
+.hours-table th,.hours-table td {border:1px solid #c8d9ea;padding:9px 3px;text-align:center;}
+.hours-table th:first-child,.hours-table td:first-child {width:126px;text-align:left;padding-left:7px;font-size:calc(14px * var(--text-scale, 1));}
+.hours-table td:first-child {background:#eaf2fb;font-weight:700;}
+.hours-table td {font-size:calc(20px * var(--text-scale, 1));font-weight:700;color:#23466c;line-height:1.1;}
+.hours-table td.dash {font-size:calc(20px * var(--text-scale, 1));font-weight:400;color:#5c6a79;}
+.schedule-note {border-top:1px solid #c8d9ea;font-size:calc(13px * var(--text-scale, 1));line-height:1.65;margin-top:12px;padding:10px 3px 0;}
+.schedule-note p {margin:3px 0;}
+.footer-map {display:block;width:100%;height:auto;margin:0 0 24px;border-radius:14px;border:1px solid #d4e0ec;}
+.clinic-access-photo {display:block;width:100%;height:auto;aspect-ratio:7 / 4;object-fit:cover;border-radius:14px;border:1px solid #d4e0ec;}
+.clinic-access-details {min-width:0;}
+.clinic-access-details > p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin:0 0 20px;}
+.clinic-access-details .clinic-access-name {font-size:calc(24px * var(--text-scale, 1));font-weight:700;color:#23466c;margin-bottom:10px;}
+.clinic-access-details .clinic-access-note {margin-bottom:24px;}
+.clinic-access-note p {font-size:calc(16px * var(--text-scale, 1));line-height:1.8;margin:0 0 16px;}
+.clinic-access-note {padding:20px 24px;background:#fff;border-radius:12px;}
+.clinic-access-note p:last-child {margin-bottom:0;}
+.clinic-columns > .clinic-right {grid-row:1 / span 2;}
+.clinic-access-details {grid-column:1;grid-row:4;display:flex;flex-direction:column;}
+.clinic-access-details .clinic-contact-box {margin-top:auto;}
+.clinic-access {grid-column:2;grid-row:3 / span 2;display:flex;flex-direction:column;min-width:0;}
+.clinic-access > .clinic-section-title,.clinic-access > .footer-map {flex-shrink:0;}
+.clinic-access-photo {flex:1;height:0;min-height:240px;}
+.footer-copyright {display:block;text-align:center;font-family:inherit;font-size:calc(16px * var(--text-scale, 1));margin-top:40px;padding-top:20px;border-top:1px solid #d4e0ec;color:#4b6076;}
+.page-hours .page-title {margin-bottom:73px;}
+.page-hours .clinic-footer {margin-top:0;}
+.page-news .clinic-footer {margin-top:177px;}
+.page-medical .clinic-footer {margin-top:178px;}
+.page-about .clinic-footer {margin-top:155px;}
+.page-faq .clinic-footer {margin-top:190px;}
+/* トップページ */
+.hero {width:100vw;min-width:1440px;height:calc(100vh - var(--site-header-height, 132px));height:calc(100svh - var(--site-header-height, 132px));margin:0;position:relative;left:50%;transform:translateX(-50%);overflow:hidden;background:#aec6d6;}
+.hero-slides {position:absolute;inset:0;}
+.hero .hero-slide {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0;transform:scale(1.12);transform-origin:center 40%;transition:opacity 1s ease;}
+.hero .hero-slide.is-active {opacity:1;animation:hero-zoom-in 5s linear both;}
+@keyframes hero-zoom-in {from {transform:scale(1);} to {transform:scale(1.12);}}
+.hero:after {content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.92),rgba(255,255,255,.78) 35%,rgba(255,255,255,.15) 68%,rgba(255,255,255,0));pointer-events:none;}
+.hero-message {position:absolute;inset:0;z-index:1;color:#163b45;text-shadow:0 1px 8px rgba(255,255,255,.7);}
+.hero-copy {position:absolute;top:27%;left:5%;font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(clamp(50px,5vw,76px) * var(--text-scale, 1));font-weight:700;line-height:1.4;letter-spacing:.06em;margin:0;}
+.hero-statements {position:absolute;bottom:10%;left:5%;width:90%;display:grid;}
+.hero-statement {grid-area:1 / 1;max-width:850px;margin:0;font-size:calc(clamp(26px,2.2vw,36px) * var(--text-scale, 1));font-weight:500;line-height:1.9;letter-spacing:.04em;overflow-wrap:anywhere;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s;}
+.hero-statement.is-active {opacity:1;visibility:visible;}
+.hero-statement--lines {max-width:none;font-size:calc(clamp(24px,2vw,32px) * var(--text-scale, 1));}
+.hero-statement-line {display:block;white-space:nowrap;}
+.hero-statement.is-active .hero-statement-line {animation:hero-line-slide-in 1.2s ease-out both;}
+.hero-statement.is-active .hero-statement-line:nth-child(2) {animation-delay:.35s;}
+.hero-statement.is-active .hero-statement-line:nth-child(3) {animation-delay:.7s;}
+.hero-statement.is-active .hero-statement-line:nth-child(4) {animation-delay:1.05s;}
+@keyframes hero-line-slide-in {from {opacity:0;transform:translateX(100px);} to {opacity:1;transform:translateX(0);}}
+@media (prefers-reduced-motion:reduce) {.hero .hero-slide,.hero-statement {transition:none;}}
+@media (prefers-reduced-motion:reduce) {.hero .hero-slide {animation:none;transform:none;}}
+@media (prefers-reduced-motion:reduce) {.hero-statement.is-active .hero-statement-line {animation:none;}}
+.home-overview {width:1200px;margin:90px auto 0;}
+.home-news {width:84%;margin:0 auto;padding:37.2px 42px 26.4px;background:#fff;color:#30383d;}
+/* お知らせの表示アニメーション */
+.home-news.is-revealed,.home-about.is-revealed,.home-medical .medical-entry.is-revealed,.page-home :is(.home-services,.clinic-footer) :is(.schedule-panel,.reservation-preview).is-revealed {animation:news-float-in .9s cubic-bezier(.2,.7,.25,1) both;}
+.home-news.is-revealed {animation-duration:1.5s;}
+@keyframes news-float-in {from {opacity:0;transform:translateY(28px);} to {opacity:1;transform:translateY(0);}}
+@media (prefers-reduced-motion:reduce) {.home-news.is-revealed,.home-about.is-revealed,.home-medical .medical-entry.is-revealed,.page-home :is(.home-services,.clinic-footer) :is(.schedule-panel,.reservation-preview).is-revealed {animation:none;}}
+.home-news h2 {position:relative;text-align:left;font-size:calc(36px * var(--text-scale, 1));line-height:1.4;margin:0;border-bottom:2px solid #e4e8eb;padding-bottom:12px;}
+.home-news h2::after {content:"";position:absolute;bottom:-2px;left:0;width:30%;height:2px;background:var(--header-blue);}
+.home-news ul {list-style:none;padding:0;margin:0;}
+.home-news li {margin:0;border-bottom:1px dotted #cbd2d8;}
+.news-row {display:grid;grid-template-columns:180px minmax(0,1fr);gap:26px;align-items:start;padding:22px 0;font-size:calc(20px * var(--text-scale, 1));line-height:1.7;}
+.news-row:hover,.news-row:focus-visible {color:#2867a6;background:#f5f9fd;opacity:1;}
+.news-row:focus-visible,.news-list-link:focus-visible {outline:2px solid var(--header-blue);outline-offset:4px;}
+.news-category {display:block;margin-top:5px;padding:2px 14px;background:#2879bf;color:#fff;border-radius:2px;text-align:center;font-size:calc(16px * var(--text-scale, 1));line-height:1.5;}
+.news-list-link {display:flex;align-items:center;justify-content:flex-end;gap:14px;width:fit-content;margin:24px 0 0 auto;color:#347bb9;font-size:calc(20px * var(--text-scale, 1));}
+.news-list-arrow {display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#347bb9;color:#fff;font-family:inherit;font-size:16px;}
+.home-news h2 {font-size:calc(30.24px * var(--text-scale, 1));padding-bottom:9.6px;}
+.home-news .news-row {grid-template-columns:151.2px minmax(0,1fr);gap:21.6px;padding:18px 0;font-size:calc(16.8px * var(--text-scale, 1));}
+.home-news .news-category {margin-top:4.2px;padding:1.68px 12px;font-size:calc(13.44px * var(--text-scale, 1));}
+.home-news .news-list-link {gap:12px;margin-top:20.4px;font-size:calc(16.8px * var(--text-scale, 1));}
+.home-news .news-list-arrow {width:19.2px;height:19.2px;font-size:13.2px;}
+.home-services {display:grid;grid-template-columns:610px 550px;gap:40px;align-items:stretch;margin-top:72px;}
+.more-button {display:block;width:415px;line-height:59px;text-align:center;border-radius:999px;background:var(--header-blue);color:#fff;font-weight:700;font-size:calc(21px * var(--text-scale, 1));margin:30px auto 0;}
+.more-button:hover {opacity:.8}
+.home-overview .schedule-panel {margin:0;width:610px}
+.home-services .schedule-inner,.clinic-footer .schedule-inner {height:100%;display:flex;flex-direction:column;padding:16px 18px;}
+.home-services .hours-table,.clinic-footer .hours-table {flex:1;}
+.reservation-preview {display:flex;flex-direction:column;min-height:385px;background:#fff;border:1px solid #d1dfed;border-radius:8px;padding:16px 18px;color:#23466c;font-family:inherit;}
+.reservation-head {display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #c8d9ea;padding-bottom:12px;color:#23466c;}
+.reservation-head strong {margin-bottom:0;}
+.reservation-head small {font-size:calc(13px * var(--text-scale, 1));font-weight:400;color:#5c6a79;}
+.reservation-preview-button {display:block;margin:auto 0 0;width:100%;min-height:46px;padding:10px 16px;border:0;text-align:center;background:var(--header-blue);color:#fff;border-radius:7px;font:inherit;cursor:pointer;}
+.reservation-preview-button:hover {background:#2f649f;}
+.reservation-preview-button:focus-visible {outline:3px solid #23466c;outline-offset:3px;}
+.home-stack {width:560px;margin:0 auto;text-align:left;}
+.home-stack h2 {text-align:center;font-size:calc(49px * var(--text-scale, 1));line-height:1.25;margin:0 0 29px}
+.page-home :is(.home-greeting,.home-medical,.home-about,.home-staff,.home-faq) > h2 {font-family:'Shippori Antique','Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;font-weight:400;}
+.home-stack .intro-photo {width:530px;height:315px;object-fit:cover;margin:0 auto 36px}
+.home-stack p {font-size:calc(20px * var(--text-scale, 1));line-height:1.55;margin-bottom:26px}
+.home-stack .signoff {text-align:right}
+.home-greeting {width:1200px;margin-top:150px;}
+.home-greeting > h2 {margin-bottom:48px;}
+.director-profile {display:grid;grid-template-columns:480px minmax(0,1fr);gap:48px;align-items:stretch;}
+.director-profile.is-revealed {animation:staff-slide-in 3s ease-in-out both;}
+@media (prefers-reduced-motion:reduce) {.director-profile.is-revealed {animation:none;}}
+.director-photo-wrap {position:relative;min-height:640px;overflow:hidden;}
+.director-photo {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:calc(67.5% - 84px) center;}
+.director-details {padding:36px 38px;background:#fff;box-shadow:0 3px 18px rgba(36,63,86,.13);color:#30383d;}
+.director-details h3 {font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(30px * var(--text-scale, 1));font-weight:700;line-height:1.5;margin:0 0 6px;}
+.home-greeting .director-role {font-size:calc(18px * var(--text-scale, 1));font-weight:500;margin:0 0 20px;padding-bottom:16px;border-bottom:1px solid var(--header-blue);}
+.home-greeting .director-details p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin-bottom:18px;}
+.director-details h4 {font-size:calc(20px * var(--text-scale, 1));font-weight:500;margin:30px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--header-blue);}
+.home-greeting .director-details p:last-child {margin-bottom:0;}
+.director-career-line {white-space:nowrap;}
+.home-medical {width:1200px;margin-top:150px;}
+.home-medical > h2 {margin-bottom:48px;}
+.home-medical > p {max-width:900px;margin-left:auto;margin-right:auto;}
+.home-medical > p:last-of-type {margin-bottom:40px;}
+.home-medical .medical-entry {text-align:left;}
+.home-medical .medical-entry h3 {font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(28px * var(--text-scale, 1));line-height:1.5;margin:0 0 24px;color:#23466c;}
+.home-medical .medical-entry p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin:0;}
+.home-medical .medical-entry:not(:has(.medical-entry-photo)) {grid-template-columns:minmax(0,1fr);}
+.home-medical .more-button {margin-top:36px;}
+.home-about {width:1200px;margin-top:150px;}
+.home-about > h2 {margin-bottom:48px;}
+.home-about-feature {display:grid;grid-template-columns:minmax(0,1fr) 540px;gap:60px;align-items:center;padding:40px;background:#fff;}
+.home-about .home-about-photo {width:540px;height:auto;border-radius:14px;}
+.home-about .more-button {width:100%;margin:30px 0 0;border:1px solid var(--header-blue);border-radius:6px;font-size:calc(18px * var(--text-scale, 1));}
+.home-about .home-about-text p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;}
+.home-staff {width:1200px;margin-top:180px;}
+.home-staff > p {max-width:none;margin:0 auto 60px;text-align:center;white-space:nowrap;}
+.home-staff .staff-card p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin-bottom:18px;}
+.home-staff .staff-details p:last-child {margin-bottom:0;}
+.home-faq {margin-top:170px}
+.home-faq .more-button {margin-bottom:45px}
+.home-faq .intro-photo {width:480px;height:520px;object-fit:cover;object-position:20% center;}
+.page-home .clinic-footer {margin-top:210px}
+/* ページ最上部へ戻る */
+.back-to-top {position:fixed;right:80px;bottom:66px;z-index:100;display:flex;align-items:center;justify-content:center;width:68px;height:68px;border:2px solid #fff;border-radius:50%;background:#137d78;color:#fff;box-shadow:0 2px 8px rgba(8,106,104,.12);}
+.back-to-top::before {content:"";width:12px;height:12px;border-top:2px solid currentColor;border-left:2px solid currentColor;transform:translateY(3px) rotate(45deg);}
+.back-to-top:hover {background:#086a68;opacity:1;}
+.back-to-top:focus-visible {outline:3px solid #086a68;outline-offset:4px;}
+@media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto;}}
+@media print {.back-to-top {display:none;}}
+/* 診療風景・院内写真 */
+.photo-gallery {width:1200px;margin:64px auto;}
+.photo-gallery h2 {font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:calc(32px * var(--text-scale, 1));line-height:1.5;color:#23466c;margin:0 0 28px;}
+.photo-gallery-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+.photo-gallery--pair .photo-gallery-grid {grid-template-columns:repeat(2,minmax(0,1fr));}
+.photo-gallery figure {margin:0;overflow:hidden;border-radius:12px;background:#fff;}
+.photo-gallery img {width:100%;height:auto;aspect-ratio:7 / 4;object-fit:cover;}
+.clinical-gallery .gallery-photo {aspect-ratio:6 / 5;object-position:right center;}
+.photo-gallery figcaption {padding:14px 18px;font-size:calc(17px * var(--text-scale, 1));line-height:1.6;color:#385976;}
+/* 印刷 */
+@media print { body{background:#fff}.global-nav a{font-size:calc(16px * var(--text-scale, 1))}.more-button{border:1px solid #ccc} }
