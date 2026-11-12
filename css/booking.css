@@ -2,6 +2,7 @@
 .booking-sample-badge {display:inline-block;padding:3px 9px;border:1px solid #c6d9ec;border-radius:5px;background:#edf5fc;color:#345b82;font-size:12px;font-weight:400;vertical-align:middle;}
 .reservation-head .booking-sample-badge {color:#345b82;}
 .booking-launch-lead {margin:20px 0 16px;font-size:calc(19px * var(--text-scale,1));line-height:1.8;}
+.clinic-reservation .booking-launch-lead {margin-top:0;}
 .booking-launch-steps {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:0 0 20px;}
 .booking-launch-steps li {display:flex;flex-direction:column;align-items:center;gap:6px;font-size:calc(12px * var(--text-scale,1));white-space:nowrap;}
 .booking-launch-steps b {display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:#eaf2fb;color:var(--header-blue);font-weight:400;font-size:16px;}
@@ -81,12 +82,27 @@
 .booking-finished-icon {display:grid;place-items:center;width:72px;height:72px;margin:0 auto;border-radius:50%;background:#e2effb;color:var(--header-blue);font-size:36px;}
 .booking-finished p {font-size:calc(17px * var(--text-scale,1));line-height:2;margin-bottom:30px;}
 @media (max-width:750px) {
-  .booking-dialog-body {padding:24px;}
+  .booking-dialog {max-width:calc(100vw - 24px);max-height:calc(100svh - 24px);border-radius:12px;}
+  .booking-dialog-header {padding:12px 16px;gap:10px;font-size:calc(16px * var(--text-scale,1));}
+  .booking-dialog-header .booking-sample-badge {display:block;width:fit-content;margin:6px 0 0;}
+  .booking-close {width:44px;height:44px;}
+  .booking-dialog-body {padding:24px 16px;}
+  .booking-dialog h2 {font-size:calc(23px * var(--text-scale,1));}
+  .booking-name-pair {grid-template-columns:1fr;gap:0;}
   .booking-field {grid-template-columns:1fr;gap:10px;}
   .booking-name-pair .booking-field {grid-template-columns:1fr;}
   .booking-week-nav {grid-template-columns:auto 1fr auto;}
   .booking-today {grid-column:2;}
   .booking-date-range {font-size:13px;}
-  .booking-actions {flex-wrap:wrap;}
+  .booking-actions {flex-direction:column;gap:12px;}
+  .booking-actions button,.booking-finish-close {width:100%;min-width:0;padding-inline:16px;}
+  .booking-week-nav {gap:8px;padding:12px 8px;}
+  .booking-week-nav button {min-height:44px;}
+  .booking-launch-field {grid-template-columns:1fr;gap:8px;}
+  .booking-launch-field select {min-height:48px;font-size:16px;}
+  .booking-launch-steps li {white-space:normal;text-align:center;}
+  .booking-launch-lead {font-size:calc(17px * var(--text-scale,1));}
+  .booking-launch-visit label {min-height:44px;}
+  .booking-visit {gap:12px;padding:12px;}
   .booking-review > div {grid-template-columns:1fr;gap:5px;}
 }

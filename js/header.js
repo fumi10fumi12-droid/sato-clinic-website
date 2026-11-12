@@ -1,6 +1,35 @@
 (() => {
   const header = document.querySelector('.site-header');
   if (header) {
+    const nav = header.querySelector('.global-nav');
+    const utilities = header.querySelector('.header-utilities');
+    const top = header.querySelector('.site-top');
+    if (nav && utilities && top) {
+      nav.id = 'site-navigation';
+      utilities.id = 'site-utilities';
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'menu-toggle';
+      toggle.textContent = 'メニュー';
+      toggle.setAttribute('aria-controls', 'site-navigation site-utilities');
+      toggle.setAttribute('aria-expanded', 'false');
+      top.append(toggle);
+      header.classList.add('has-mobile-menu');
+      const setOpen = (open) => {
+        header.classList.toggle('is-menu-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.textContent = open ? '閉じる' : 'メニュー';
+      };
+      toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+      header.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+      header.querySelectorAll('nav a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+      window.matchMedia('(max-width: 767px)').addEventListener('change', () => setOpen(false));
+    }
     const updateHeaderHeight = () => {
       document.documentElement.style.setProperty('--site-header-height', `${header.getBoundingClientRect().height}px`);
     };

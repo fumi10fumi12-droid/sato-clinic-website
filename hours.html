@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=1440"><meta name="description" content="佐藤医院の診療時間・所在地。地域に根ざした医療を目指します。"><title>診療時間・所在地 | 佐藤医院</title><link rel="stylesheet" href="./css/style.css"><link rel="stylesheet" href="./css/booking.css"><script src="./js/header.js" defer></script><script src="./js/reservation-booking.js" defer></script></head>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="佐藤医院の診療時間・所在地。地域に根ざした医療を目指します。"><title>診療時間・所在地 | 佐藤医院</title><link rel="stylesheet" href="./css/style.css"><link rel="stylesheet" href="./css/booking.css"><script src="./js/header.js" defer></script><script src="./js/reservation-booking.js" defer></script></head>
 <body class="page-hours"><header class="site-header" id="top">
    <div class="site-top">
   <div class="site-brand">
     <a class="site-logo" href="index.html" aria-label="佐藤医院 トップページ"><img class="" src="./img/Logo/logo.png" alt="佐藤医院 Sato Clinic ロゴ" loading="eager"></a>
+    <ul class="department-badges" aria-label="診療科目"><li>内科</li><li>循環器科</li><li>呼吸器科</li><li>予防医療・健康診断</li><li>生活習慣病</li></ul>
   </div>
   <div class="header-utilities">
     <div class="text-size-control" role="group" aria-label="文字サイズの変更">
@@ -20,25 +21,13 @@
 </div>
 <nav class="global-nav" aria-label="グローバルナビゲーション"><a href="index.html">トップ</a><a href="news.html">お知らせ</a><a href="medical.html">診療内容</a><a href="about.html">当院について</a><a href="hours.html" aria-current="page">診療時間・所在地</a><a href="faq.html">よくある質問</a></nav>
  </header><main class="page-main"><section class="page-banner" aria-labelledby="hours-page-title"><img src="./img/Hospital_Exterior/hospital_3.jpg" alt="診察ベッドや医療設備のある診察室" loading="eager"><h1 class="page-title" id="hours-page-title">診療時間・所在地</h1></section><nav class="page-breadcrumb" aria-label="パンくずリスト"><a href="index.html">トップページ</a><span aria-hidden="true">/</span><span aria-current="page">診療時間・所在地</span></nav><footer class="clinic-footer" aria-label="佐藤医院の所在地、診療時間、診療科目">
-<div class="clinic-columns">
- <section class="clinic-hours" aria-label="診療時間と連絡先">
-  <h3 class="clinic-section-title">診療時間・受付時間</h3>
-  <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner"><h3>診療時間</h3>
-<table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
-<tbody><tr><td>午前9:00-12:00</td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td>午後13:00-18:00</td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
-  <dl class="clinic-info-list">
-   <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理</dd></div>
-  </dl>
-
- </section>
- <div class="clinic-right"><section class="clinic-reservation" aria-label="ご予約フォーム"><h3 class="clinic-section-title">ご予約</h3><form class="reservation-preview" aria-label="ご予約フォーム"><div class="reservation-head"><strong>ご予約フォーム</strong></div><p class="booking-launch-lead">空き状況を見ながら、<br>ご希望の日時をお選びいただけます。</p><ol class="booking-launch-steps" aria-label="ご予約の流れ"><li><b>1</b>日時選択</li><li><b>2</b>予約者情報</li><li><b>3</b>内容確認</li></ol><label class="booking-launch-field"><span>診療科目</span><select name="department" aria-label="診療科目" required><option value="">選択してください</option><option>内科</option><option>循環器科</option><option>呼吸器科</option><option>予防医療・健康診断</option><option>生活習慣病</option></select></label><fieldset class="booking-visit booking-launch-visit"><legend>受診区分</legend><label><input type="radio" name="visit" value="初診" checked> 初診の方</label><label><input type="radio" name="visit" value="再診"> 再診の方</label></fieldset><p class="booking-launch-note">操作確認用の見本です。実際の予約は登録されません。</p><button class="reservation-preview-button" type="submit">空き状況を確認して予約する <span aria-hidden="true">›</span></button></form></section></div>
+<div class="clinic-columns clinic-columns--access-first">
  <section class="clinic-access-details" aria-label="医院情報とお問い合わせ">
   <p class="clinic-access-name">佐藤医院</p>
   <p>〒123-4567<br>東京都台東区上野0-0-0</p>
   <div class="clinic-access-note">
-   <p><strong>電車でお越しの方</strong><br>最寄駅：JR上野駅より徒歩5分<br>最寄駅から徒歩5分の便利な立地です。</p>
-   <p><strong>お車でお越しの方</strong><br>当院専用の無料駐車場 10台分あり<br>ご来院の際は、交通状況にご注意ください。</p>
+   <p><strong class="access-method-title"><span>電車でお越しの方</span><svg class="access-method-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="15" rx="3"/><rect x="8" y="6" width="8" height="5" rx="1"/><path d="M12 6v5M8 18l-2 3m10-3 2 3M7 20h10"/><circle cx="9" cy="14.5" r=".8" fill="currentColor" stroke="none"/><circle cx="15" cy="14.5" r=".8" fill="currentColor" stroke="none"/></svg></strong>最寄駅：JR上野駅より徒歩5分<br>最寄駅から徒歩5分の便利な立地です。</p>
+   <p><strong class="access-method-title"><span>お車でお越しの方</span><svg class="access-method-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 2-5h10l2 5"/><rect x="3" y="12" width="18" height="8" rx="2"/><path d="M5 20v2m14-2v2M6 16h2m8 0h2M8 7l-1 5m9-5 1 5"/></svg></strong>当院専用の無料駐車場 10台分あり<br>ご来院の際は、交通状況にご注意ください。</p>
   </div>
   <div class="clinic-contact-box">
    <h4>電話予約・お問い合わせ</h4>
@@ -50,10 +39,24 @@
  </section>
  <section class="clinic-access" aria-label="所在地と交通アクセス">
   <h3 class="clinic-section-title">交通アクセス</h3>
-  <img class="footer-map" src="./img/map.jpg" alt="佐藤医院周辺の案内地図" loading="lazy">
-  <img class="clinic-access-photo" src="./img/Hospital_Exterior/hospital_5.jpg" alt="自然光の入る医院の廊下" loading="lazy">
+  <iframe class="footer-map" title="交通アクセスのGoogleマップ" src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%9D%B1%E4%B8%8A%E9%87%8E3-15-5%20%E6%9B%BD%E6%88%91%E3%83%93%E3%83%AB3F&amp;output=embed&amp;hl=ja" width="540" height="320" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  <a class="map-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%9D%B1%E4%B8%8A%E9%87%8E3-15-5%20%E6%9B%BD%E6%88%91%E3%83%93%E3%83%AB3F" target="_blank" rel="noopener noreferrer">Googleマップで経路を見る<span aria-hidden="true"> ↗</span></a>
+  <img class="clinic-access-photo" src="./img/Infomation_Image/information_2.jpg" alt="明るい窓辺で笑顔で案内を受ける患者" loading="lazy">
 
  </section>
+ <section class="clinic-hours" aria-label="診療時間と連絡先">
+  <h3 class="clinic-section-title">診療時間・受付時間</h3>
+  <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
+<div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
+<tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+  <dl class="clinic-info-list">
+   <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理</dd></div>
+  </dl>
+
+ </section>
+ <div class="clinic-right"><section class="clinic-reservation" aria-label="ご予約フォーム"><h3 class="clinic-section-title">ご予約</h3><form class="reservation-preview" aria-label="ご予約フォーム"><p class="booking-launch-lead">空き状況を見ながら、<br>ご希望の日時をお選びいただけます。</p><ol class="booking-launch-steps" aria-label="ご予約の流れ"><li><b>1</b>日時選択</li><li><b>2</b>予約者情報</li><li><b>3</b>内容確認</li></ol><label class="booking-launch-field"><span>診療科目</span><select name="department" aria-label="診療科目" required><option value="">選択してください</option><option>内科</option><option>循環器科</option><option>呼吸器科</option><option>予防医療・健康診断</option><option>生活習慣病</option></select></label><fieldset class="booking-visit booking-launch-visit"><legend>受診区分</legend><label><input type="radio" name="visit" value="初診" checked> 初診の方</label><label><input type="radio" name="visit" value="再診"> 再診の方</label></fieldset><p class="booking-launch-note">操作確認用の見本です。実際の予約は登録されません。</p><button class="reservation-preview-button" type="submit">空き状況を確認して予約する <span aria-hidden="true">›</span></button></form></section></div>
+
 </div>
 <small class="footer-copyright">© sato-clinic</small>
 </footer></main><a class="back-to-top" href="#top" aria-label="最上部に戻る" title="最上部に戻る"></a>

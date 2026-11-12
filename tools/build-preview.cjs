@@ -66,7 +66,7 @@ const navigation = `
 })();
 </script>`;
 const output = `<!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>佐藤医院｜全6ページ プレビュー</title><style>${css}
 .preview-page{display:none;}.preview-page.page-home{display:block;}
 .preview-pages:has(> .preview-page:target) > .preview-page{display:none;}

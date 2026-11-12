@@ -1,5 +1,5 @@
 (() => {
-  const sections = document.querySelectorAll('.home-news, .director-profile, .home-about, .home-medical .medical-entry, .home-staff .staff-card, .home-services > .schedule-panel, .home-services > .reservation-preview, .page-home .clinic-hours > .schedule-panel, .page-home .clinic-reservation > .reservation-preview, .page-about .about-intro, .page-about .about-block, .page-about .staff-card, .page-about .photo-gallery, .page-medical .medical-entry, .page-medical .clinical-gallery figure');
+  const sections = document.querySelectorAll('.home-news, .home-faq .intro-photo, .director-profile, .home-about, .home-medical .medical-entry, .home-staff .staff-card, .home-services > .schedule-panel, .home-services > .reservation-preview, .page-home .clinic-hours > .schedule-panel, .page-home .clinic-reservation > .reservation-preview, .page-about .about-intro, .page-about .about-block, .page-about .staff-card, .page-about .photo-gallery, .page-news .news-article, .page-medical .medical-entry, .page-medical .clinical-gallery figure');
   if (!sections.length || !('IntersectionObserver' in window)) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -12,7 +12,7 @@
       }
       if (!entry.isIntersecting) return;
       if (entry.target.matches('.home-news') && entry.intersectionRatio < 0.12) return;
-      if (entry.target.matches('.page-medical .medical-entry, .page-medical .clinical-gallery figure') && entry.intersectionRatio < 0.12) return;
+      if (entry.target.matches('.home-faq .intro-photo, .page-news .news-article, .page-medical .medical-entry, .page-medical .clinical-gallery figure') && entry.intersectionRatio < 0.12) return;
       if (entry.target.matches('.home-staff .staff-card') && entry.intersectionRatio < 0.2) return;
       if (entry.target.classList.contains('director-profile') && entry.intersectionRatio < 0.2) return;
       entry.target.classList.add('is-revealed');
