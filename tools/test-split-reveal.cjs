@@ -112,14 +112,14 @@ async function main() {
     assert.equal(await evaluate(`document.querySelectorAll('.home-faq-slider .clinical-slider-dots button').length`),5);
     await arrow('next');await delay(120);
     assert.equal(await status(),'2 / 5');
-    const frame=await evaluate(`(()=>{const s=document.querySelector('.home-faq-slider'),t=s.querySelector('.clinical-slider-track');return {revealing:s.classList.contains('is-revealing'),shutters:[...t.querySelectorAll('.split-reveal-shutter')].map(e=>({x:new DOMMatrixReadOnly(getComputedStyle(e).transform).m41,clip:getComputedStyle(e).clipPath,hidden:e.getAttribute('aria-hidden')})),scroll:t.scrollLeft,active:t.querySelectorAll('figure.is-active').length};})()`);
-    assert.equal(frame.revealing,true);assert.equal(frame.shutters.length,2);
-    assert(frame.shutters[0].x<0&&frame.shutters[1].x>0,'Shutters open in opposite directions');
-    assert(frame.shutters.every(s=>s.clip.includes('50%')&&s.hidden==='true'));
+    const frame=await evaluate(`(()=>{const s=document.querySelector('.home-faq-slider'),t=s.querySelector('.clinical-slider-track');return {revealing:s.classList.contains('is-revealing'),shutters:[...t.querySelectorAll('.faq-fade-overlay')].map(e=>({opacity:Number(getComputedStyle(e).opacity),transform:getComputedStyle(e).transform,hidden:e.getAttribute('aria-hidden')})),scroll:t.scrollLeft,active:t.querySelectorAll('figure.is-active').length};})()`);
+    assert.equal(frame.revealing,true);assert.equal(frame.shutters.length,1);
+    assert(frame.shutters[0].opacity>0&&frame.shutters[0].opacity<1,'Outgoing image fades out');
+    assert(frame.shutters.every(s=>s.transform==='none'&&s.hidden==='true'));
     assert.equal(frame.scroll,0,'No horizontal slide movement');assert.equal(frame.active,1);
-    if(file==='index.html')await screenshot('split-reveal-in-motion');
+    if(file==='index.html')await screenshot('fade-out-in-motion');
     await settle('2 / 5');
-    assert.equal(await evaluate(`document.querySelectorAll('.home-faq-slider .split-reveal-shutter').length`),0);
+    assert.equal(await evaluate(`document.querySelectorAll('.home-faq-slider .faq-fade-overlay').length`),0);
     await evaluate(`(()=>{const b=document.querySelector('.home-faq-slider [data-slide="next"]');b.click();b.click();b.click();})()`);
     await settle('5 / 5');
     await arrow('next');await settle('1 / 5');
@@ -131,7 +131,7 @@ async function main() {
     for(const width of [375,768,1440]){
       await resize(width);await evaluate(`document.querySelector('.home-faq-slider').scrollIntoView({block:'center',behavior:'instant'})`);await delay(80);
       for(let i=0;i<5;i++){await choose(i);await settle((i+1)+' / 5');}
-      assert.equal(await evaluate(`document.querySelectorAll('.home-faq-slider .split-reveal-shutter').length`),0,'Reduced-motion mode avoids animation');
+      assert.equal(await evaluate(`document.querySelectorAll('.home-faq-slider .faq-fade-overlay').length`),0,'Reduced-motion mode avoids animation');
       await evaluate(`document.querySelector('#home-smile-slider-track').dispatchEvent(new KeyboardEvent('keydown',{key:'Home',bubbles:true}))`);await settle('1 / 5');
       await evaluate(`document.querySelector('#home-smile-slider-track').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}))`);await settle('2 / 5');
       await evaluate(`document.querySelector('#home-smile-slider-track').dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}))`);await settle('5 / 5');
@@ -144,7 +144,7 @@ async function main() {
       }
       const layout=await inspect();assert(layout.scrollWidth<=layout.width+1,file+' fits '+width);
     }
-    console.log(file+': split direction, animation cleanup, rapid clicks, wraparound, five photos, keyboard, swipe and reduced-motion behavior passed');
+    console.log(file+': fade opacity, animation cleanup, rapid clicks, wraparound, five photos, keyboard, swipe and reduced-motion behavior passed');
   }
   for(const [file,slider,count]of [['medical.html','.clinical-slider',6],['about.html','.interior-slider',3]]){
     await resize(1440);await navigate(file);await evaluate(`document.querySelector('${slider}').scrollIntoView({block:'center',behavior:'instant'})`);await delay(650);
@@ -152,6 +152,6 @@ async function main() {
     assert.equal(await evaluate(`document.querySelector('${slider} .clinical-slider-status').textContent`),'2 / '+count);
   }
   assert.deepEqual(errors,[],'No JavaScript or console errors');
-  console.log('Existing medical/interior sliders still work. Screenshot: '+output+'/split-reveal-in-motion.png');
+  console.log('Existing medical/interior sliders still work. Screenshot: '+output+'/fade-out-in-motion.png');
 }
 main().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{clearTimeout(timeout);socket?.close();chrome.kill();});

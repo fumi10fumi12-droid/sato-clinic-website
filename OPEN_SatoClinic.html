@@ -202,8 +202,10 @@ h1,h2,h3 {font-weight:800}
 .hours-table td.dash {font-size:calc(20px * var(--text-scale, 1));font-weight:400;color:#5c6a79;}
 .schedule-note {border-top:1px solid #c8d9ea;font-size:calc(13px * var(--text-scale, 1));line-height:1.65;margin-top:12px;padding:10px 3px 0;}
 .schedule-note p {margin:3px 0;}
-.clinic-footer .schedule-note {font-size:calc(14px * var(--text-scale,1));line-height:calc(21.45px * var(--text-scale,1));letter-spacing:-.04em;}
-.clinic-footer .schedule-note p {line-height:inherit;}
+.schedule-holiday-note {display:flex;align-items:flex-start;}
+.schedule-holiday-note > span:last-child {min-width:0;flex:1;}
+:is(.clinic-footer,.home-overview) .schedule-note {font-size:calc(15px * var(--text-scale,1));line-height:calc(21.45px * var(--text-scale,1));letter-spacing:-.04em;}
+:is(.clinic-footer,.home-overview) .schedule-note p {line-height:inherit;}
 .footer-map {display:block;width:100%;height:320px;margin:0 0 12px;border-radius:14px;border:1px solid #d4e0ec;}
 .map-directions {display:block;align-self:flex-start;flex-shrink:0;margin:0 0 24px;color:#23466c;font-size:calc(16px * var(--text-scale, 1));line-height:1.6;text-decoration:underline;text-underline-offset:4px;}
 .clinic-access-photo {display:block;width:100%;height:auto;aspect-ratio:7 / 4;object-fit:cover;border-radius:14px;border:1px solid #d4e0ec;}
@@ -254,7 +256,12 @@ h1,h2,h3 {font-weight:800}
 .clinic-footer .clinic-access-note .clinic-access-address {font-size:calc(18px * var(--text-scale,1));line-height:1.9;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid #d4e0ec;}
 .clinic-footer .clinic-reservation .reservation-preview {flex:1;min-height:0;padding:0;border:0;background:transparent;}
 .clinic-footer .schedule-inner {padding:0;border:0;background:transparent;}
-.clinic-footer .hours-table {min-width:0;}
+:is(.clinic-footer,.home-overview) .hours-table {min-width:0;font-size:calc(16px * var(--text-scale,1));}
+:is(.clinic-footer,.home-overview) .hours-table th,:is(.clinic-footer,.home-overview) .hours-table td {padding-block:12px;}
+:is(.clinic-footer,.home-overview) .hours-table th:first-child,:is(.clinic-footer,.home-overview) .hours-table td:first-child {width:25%;padding-inline:3px;text-align:center;font-size:calc(16px * var(--text-scale,1));}
+:is(.clinic-footer,.home-overview) .hours-table td,:is(.clinic-footer,.home-overview) .hours-table td.dash {font-size:calc(22px * var(--text-scale,1));}
+:is(.clinic-footer,.home-overview) .hours-table .hours-period,:is(.clinic-footer,.home-overview) .hours-table .hours-time {display:block;line-height:1.45;white-space:nowrap;}
+:is(.clinic-footer,.home-overview) .hours-table .hours-time {font-size:calc(16px * var(--text-scale,1));letter-spacing:-.02em;}
 .clinic-footer .clinic-columns--access-first > .clinic-photo-card {padding:0;overflow:hidden;}
 .clinic-footer .clinic-photo-card .clinic-access-photo {border:0;border-radius:0;aspect-ratio:1;}
 @media screen and (min-width:1101px) {
@@ -313,7 +320,7 @@ h1,h2,h3 {font-weight:800}
 .more-button:hover {opacity:.8}
 .home-overview .schedule-panel {margin:0;width:610px}
 .home-services .schedule-inner,.clinic-footer .schedule-inner {height:100%;display:flex;flex-direction:column;padding:16px 18px;}
-.home-services .hours-table,.clinic-footer .hours-table {flex:1;}
+.home-services .hours-table,:is(.clinic-footer,.home-overview) .hours-table {flex:1;}
 .reservation-preview {display:flex;flex-direction:column;min-height:385px;background:#fff;border:1px solid #d1dfed;border-radius:8px;padding:16px 18px;color:#23466c;font-family:inherit;}
 .reservation-head {display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #c8d9ea;padding-bottom:12px;color:#23466c;}
 .reservation-head strong {margin-bottom:0;}
@@ -398,6 +405,8 @@ h1,h2,h3 {font-weight:800}
 .clinical-slider-status {margin:0;font-size:calc(14px * var(--text-scale,1));font-variant-numeric:tabular-nums;}
 .clinical-slider :is(button,.clinical-slider-track):focus-visible {outline:3px solid var(--header-blue);outline-offset:-3px;}
 .clinical-slider-arrow:hover {background:#edf5fc;}
+.clinical-slider-autoplay {min-height:44px;padding:8px 16px;border:1px solid #b5cbe1;border-radius:22px;background:#fff;color:#23466c;font:inherit;font-size:calc(14px * var(--text-scale,1));cursor:pointer;}
+.clinical-slider-autoplay:hover {background:#edf5fc;}
 /* 印刷 */
 /* 1440pxのPCデザインを維持し、画面が狭い場合だけ組み替える */
 @media screen and (max-width:1439px) {
@@ -549,10 +558,15 @@ h1,h2,h3 {font-weight:800}
   .hours-table th:first-child,.hours-table td:first-child {width:34%;padding-inline:3px;font-size:calc(clamp(10px,2.8vw,12px) * var(--text-scale,1));}
   .hours-table td,.hours-table td.dash {font-size:calc(clamp(14px,3.8vw,18px) * var(--text-scale,1));}
   .hours-table .hours-period,.hours-table .hours-time {display:block;line-height:1.5;white-space:nowrap;}
+  :is(.clinic-footer,.home-overview) .hours-table {font-size:calc(clamp(10px,2.8vw,13px) * var(--text-scale,1));}
+  :is(.clinic-footer,.home-overview) .hours-table th,:is(.clinic-footer,.home-overview) .hours-table td {padding-block:10px;}
+  :is(.clinic-footer,.home-overview) .hours-table th:first-child,:is(.clinic-footer,.home-overview) .hours-table td:first-child {width:34%;font-size:calc(clamp(12px,3.4vw,15px) * var(--text-scale,1));}
+  :is(.clinic-footer,.home-overview) .hours-table td,:is(.clinic-footer,.home-overview) .hours-table td.dash {font-size:calc(clamp(16px,4vw,20px) * var(--text-scale,1));}
+  :is(.clinic-footer,.home-overview) .hours-table .hours-time {font-size:calc(clamp(12px,3.4vw,15px) * var(--text-scale,1));}
   .schedule-inner h3,.reservation-head strong {font-size:calc(21px * var(--text-scale,1));}
   .schedule-note {font-size:calc(13px * var(--text-scale,1));}
   .schedule-note p {font-size:inherit;line-height:1.8;}
-  .clinic-footer .schedule-note {line-height:calc(23.4px * var(--text-scale,1));}
+  :is(.clinic-footer,.home-overview) .schedule-note {line-height:calc(23.4px * var(--text-scale,1));}
   .back-to-top {width:48px;height:48px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));}
   /* 横移動アニメーションによる画面外へのはみ出しを防ぐ */
   .home-staff .staff-card.is-revealed,.page-about .staff-card.is-revealed {animation-name:about-float-in;animation-duration:1.2s;}
@@ -709,14 +723,12 @@ h1,h2,h3 {font-weight:800}
   .department-badges li {font-size:calc(11px * var(--text-scale,1));}
 }
 
-/* 笑顔の写真：中央から左右に開くスプリットリビール */
+/* 笑顔の写真：前の写真が薄くなり、次の写真に切り替わるフェードアウト */
 .home-faq-slider.is-split-ready .clinical-slider-track {position:relative;display:block;aspect-ratio:7 / 4;overflow:hidden;scroll-snap-type:none;touch-action:pan-y;isolation:isolate;}
 .home-faq-slider.is-split-ready figure {position:absolute;inset:0;width:100%;height:100%;visibility:hidden;opacity:0;}
 .home-faq-slider.is-split-ready figure.is-active {visibility:visible;opacity:1;}
 .home-faq-slider.is-split-ready .gallery-photo {width:100%;height:100%;aspect-ratio:auto;object-fit:cover;user-select:none;-webkit-user-drag:none;}
-.split-reveal-shutter {position:absolute;inset:0;z-index:1;pointer-events:none;will-change:transform;}
-.split-reveal-shutter--left {clip-path:inset(0 50% 0 0);}
-.split-reveal-shutter--right {clip-path:inset(0 0 0 50%);}
+.faq-fade-overlay {position:absolute;inset:0;z-index:1;pointer-events:none;will-change:opacity;}
 .home-faq-slider :is(button,.clinical-slider-track):focus-visible {outline:3px solid var(--header-blue);outline-offset:-3px;}
 
 /* 院長挨拶の写真：画面に入ると穏やかに回転しながらフェードイン */
@@ -958,7 +970,7 @@ h1,h2,h3 {font-weight:800}
  <div class="home-services"><div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner"><h3>診療時間</h3>
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div><form class="reservation-preview" aria-label="ご予約フォーム"><div class="reservation-head"><strong>ご予約フォーム</strong></div><p class="booking-launch-lead">空き状況を見ながら、<br>ご希望の日時をお選びいただけます。</p><ol class="booking-launch-steps" aria-label="ご予約の流れ"><li><b>1</b>日時選択</li><li><b>2</b>予約者情報</li><li><b>3</b>内容確認</li></ol><label class="booking-launch-field"><span>診療科目</span><select name="department" aria-label="診療科目" required><option value="">選択してください</option><option>内科</option><option>循環器科</option><option>呼吸器科</option><option>予防医療・健康診断</option><option>生活習慣病</option><option>オンライン診療</option></select></label><fieldset class="booking-visit booking-launch-visit"><legend>受診区分</legend><label><input type="radio" name="visit" value="初診" checked> 初診の方</label><label><input type="radio" name="visit" value="再診"> 再診の方</label></fieldset><p class="booking-launch-note">操作確認用の見本です。実際の予約は登録されません。</p><button class="reservation-preview-button" type="submit">空き状況を確認して予約する <span aria-hidden="true">›</span></button></form></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div><form class="reservation-preview" aria-label="ご予約フォーム"><div class="reservation-head"><strong>ご予約フォーム</strong></div><p class="booking-launch-lead">空き状況を見ながら、<br>ご希望の日時をお選びいただけます。</p><ol class="booking-launch-steps" aria-label="ご予約の流れ"><li><b>1</b>日時選択</li><li><b>2</b>予約者情報</li><li><b>3</b>内容確認</li></ol><label class="booking-launch-field"><span>診療科目</span><select name="department" aria-label="診療科目" required><option value="">選択してください</option><option>内科</option><option>循環器科</option><option>呼吸器科</option><option>予防医療・健康診断</option><option>生活習慣病</option><option>オンライン診療</option></select></label><fieldset class="booking-visit booking-launch-visit"><legend>受診区分</legend><label><input type="radio" name="visit" value="初診" checked> 初診の方</label><label><input type="radio" name="visit" value="再診"> 再診の方</label></fieldset><p class="booking-launch-note">操作確認用の見本です。実際の予約は登録されません。</p><button class="reservation-preview-button" type="submit">空き状況を確認して予約する <span aria-hidden="true">›</span></button></form></div>
  </section>
  <section class="home-stack home-greeting" aria-labelledby="director-greeting-title">
   <h2 id="director-greeting-title" class="section-rule">院長挨拶</h2>
@@ -1015,7 +1027,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1063,7 +1075,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1106,7 +1118,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1153,7 +1165,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1196,7 +1208,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1240,7 +1252,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1288,7 +1300,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1336,7 +1348,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1384,7 +1396,7 @@ h1,h2,h3 {font-weight:800}
   <div class="schedule-panel" aria-label="診療時間表"><div class="schedule-inner">
 <div class="schedule-table-scroll" role="region" aria-label="診療時間表" tabindex="0"><table class="hours-table"><thead><tr><th scope="col">時間帯</th><th scope="col">月曜</th><th scope="col">火曜</th><th scope="col">水曜</th><th scope="col">木曜</th><th scope="col">金曜</th><th scope="col">土曜</th><th scope="col">日曜</th></tr></thead>
 <tbody><tr><td><span class="hours-period">午前</span><span class="hours-time">9:00-12:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td>●</td><td class="dash">－</td></tr><tr><td><span class="hours-period">午後</span><span class="hours-time">13:00-18:00</span></td><td>●</td><td>●</td><td>●</td><td class="dash">－</td><td>●</td><td class="dash">－</td><td class="dash">－</td></tr></tbody></table></div>
-<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p>・祝祭日も診療を行っておりますが、休診日もございますので、事前にご確認ください。</p></div></div></div>
+<div class="schedule-note"><p>●＝診療　／＝休診</p><p>・受付時間：午前　8:00〜11:00　／　午後　12:00〜17:00</p><p>・休診日：木曜・土曜午後・日曜</p><p class="schedule-holiday-note"><span aria-hidden="true">・</span><span>祝祭日も診療を行っておりますが、休診日もございますので、<br>事前にご確認ください。</span></p></div></div></div>
   <dl class="clinic-info-list">
    <div class="clinic-info-row"><dt>診療科目</dt><dd>内科・循環器科・呼吸器科<br>予防医療・健康診断<br>生活習慣病（高血圧、糖尿病等）の治療・管理<br>オンライン診療</dd></div>
   </dl>
@@ -1893,11 +1905,25 @@ h1,h2,h3 {font-weight:800}
     let requestId = 0;
     let animations = [];
     let pointer = null;
+    let timer;
+    let paused = reducedMotion.matches;
+    const autoplay = document.createElement('button');
+    autoplay.type = 'button';
+    autoplay.className = 'clinical-slider-autoplay';
+    const schedule = () => {
+      window.clearTimeout(timer);
+      if (!paused && !document.hidden) timer = window.setTimeout(() => goTo(requested + 1), 5000);
+    };
+    const updateAutoplay = () => {
+      autoplay.textContent = paused ? '自動再生する' : '一時停止';
+      autoplay.setAttribute('aria-label', paused ? '写真の自動再生を開始' : '写真の自動再生を一時停止');
+      schedule();
+    };
 
     const clearReveal = () => {
       animations.forEach((animation) => animation.cancel());
       animations = [];
-      track.querySelectorAll('.split-reveal-shutter').forEach((shutter) => shutter.remove());
+      track.querySelectorAll('.faq-fade-overlay').forEach((overlay) => overlay.remove());
       slider.classList.remove('is-revealing');
     };
     const update = () => {
@@ -1911,6 +1937,7 @@ h1,h2,h3 {font-weight:800}
       slides[(current + 1) % slides.length].querySelector('img').loading = 'eager';
     };
     const goTo = async (index) => {
+      schedule();
       const next = (index + slides.length) % slides.length;
       requested = next;
       const request = ++requestId;
@@ -1932,25 +1959,19 @@ h1,h2,h3 {font-weight:800}
       update();
       if (reducedMotion.matches || typeof image.animate !== 'function') return;
 
-      const shutters = ['left', 'right'].map((side) => {
-        const shutter = document.createElement('div');
-        shutter.className = `split-reveal-shutter split-reveal-shutter--${side}`;
-        shutter.setAttribute('aria-hidden', 'true');
-        const photo = outgoing.cloneNode(false);
-        photo.alt = '';
-        photo.loading = 'eager';
-        photo.draggable = false;
-        shutter.append(photo);
-        track.append(shutter);
-        return shutter;
-      });
+      const overlay = document.createElement('div');
+      overlay.className = 'faq-fade-overlay';
+      overlay.setAttribute('aria-hidden', 'true');
+      const photo = outgoing.cloneNode(false);
+      photo.alt = '';
+      photo.loading = 'eager';
+      photo.draggable = false;
+      overlay.append(photo);
+      track.append(overlay);
       slider.classList.add('is-revealing');
-      const timing = {duration: 760, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards'};
-      animations = shutters.map((shutter, index) => shutter.animate([
-        {transform: 'translateX(0)'},
-        {transform: `translateX(${index === 0 ? '-52%' : '52%'})`},
-      ], timing));
-      animations.push(image.animate([{transform: 'scale(1.035)'}, {transform: 'scale(1)'}], timing));
+      animations = [overlay.animate([{opacity: 1}, {opacity: 0}], {
+        duration: 600, easing: 'ease-in-out', fill: 'forwards',
+      })];
       Promise.all(animations.map((animation) => animation.finished)).then(() => {
         if (request === requestId) clearReveal();
       }).catch(() => {});
@@ -1991,6 +2012,8 @@ h1,h2,h3 {font-weight:800}
     track.addEventListener('pointercancel', () => { pointer = null; });
     reducedMotion.addEventListener('change', () => {
       if (!reducedMotion.matches) return;
+      paused = true;
+      updateAutoplay();
       ++requestId;
       requested = current;
       clearReveal();
@@ -1999,6 +2022,13 @@ h1,h2,h3 {font-weight:800}
     slides[0].querySelector('img').loading = 'eager';
     update();
     controls.hidden = false;
+    autoplay.addEventListener('click', () => {
+      paused = !paused;
+      updateAutoplay();
+    });
+    controls.append(autoplay);
+    document.addEventListener('visibilitychange', schedule);
+    updateAutoplay();
   });
 })();
 

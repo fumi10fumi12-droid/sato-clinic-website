@@ -12,11 +12,25 @@
     let requestId = 0;
     let animations = [];
     let pointer = null;
+    let timer;
+    let paused = reducedMotion.matches;
+    const autoplay = document.createElement('button');
+    autoplay.type = 'button';
+    autoplay.className = 'clinical-slider-autoplay';
+    const schedule = () => {
+      window.clearTimeout(timer);
+      if (!paused && !document.hidden) timer = window.setTimeout(() => goTo(requested + 1), 5000);
+    };
+    const updateAutoplay = () => {
+      autoplay.textContent = paused ? '自動再生する' : '一時停止';
+      autoplay.setAttribute('aria-label', paused ? '写真の自動再生を開始' : '写真の自動再生を一時停止');
+      schedule();
+    };
 
     const clearReveal = () => {
       animations.forEach((animation) => animation.cancel());
       animations = [];
-      track.querySelectorAll('.split-reveal-shutter').forEach((shutter) => shutter.remove());
+      track.querySelectorAll('.faq-fade-overlay').forEach((overlay) => overlay.remove());
       slider.classList.remove('is-revealing');
     };
     const update = () => {
@@ -30,6 +44,7 @@
       slides[(current + 1) % slides.length].querySelector('img').loading = 'eager';
     };
     const goTo = async (index) => {
+      schedule();
       const next = (index + slides.length) % slides.length;
       requested = next;
       const request = ++requestId;
@@ -51,25 +66,19 @@
       update();
       if (reducedMotion.matches || typeof image.animate !== 'function') return;
 
-      const shutters = ['left', 'right'].map((side) => {
-        const shutter = document.createElement('div');
-        shutter.className = `split-reveal-shutter split-reveal-shutter--${side}`;
-        shutter.setAttribute('aria-hidden', 'true');
-        const photo = outgoing.cloneNode(false);
-        photo.alt = '';
-        photo.loading = 'eager';
-        photo.draggable = false;
-        shutter.append(photo);
-        track.append(shutter);
-        return shutter;
-      });
+      const overlay = document.createElement('div');
+      overlay.className = 'faq-fade-overlay';
+      overlay.setAttribute('aria-hidden', 'true');
+      const photo = outgoing.cloneNode(false);
+      photo.alt = '';
+      photo.loading = 'eager';
+      photo.draggable = false;
+      overlay.append(photo);
+      track.append(overlay);
       slider.classList.add('is-revealing');
-      const timing = {duration: 760, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'forwards'};
-      animations = shutters.map((shutter, index) => shutter.animate([
-        {transform: 'translateX(0)'},
-        {transform: `translateX(${index === 0 ? '-52%' : '52%'})`},
-      ], timing));
-      animations.push(image.animate([{transform: 'scale(1.035)'}, {transform: 'scale(1)'}], timing));
+      animations = [overlay.animate([{opacity: 1}, {opacity: 0}], {
+        duration: 600, easing: 'ease-in-out', fill: 'forwards',
+      })];
       Promise.all(animations.map((animation) => animation.finished)).then(() => {
         if (request === requestId) clearReveal();
       }).catch(() => {});
@@ -110,6 +119,8 @@
     track.addEventListener('pointercancel', () => { pointer = null; });
     reducedMotion.addEventListener('change', () => {
       if (!reducedMotion.matches) return;
+      paused = true;
+      updateAutoplay();
       ++requestId;
       requested = current;
       clearReveal();
@@ -118,5 +129,12 @@
     slides[0].querySelector('img').loading = 'eager';
     update();
     controls.hidden = false;
+    autoplay.addEventListener('click', () => {
+      paused = !paused;
+      updateAutoplay();
+    });
+    controls.append(autoplay);
+    document.addEventListener('visibilitychange', schedule);
+    updateAutoplay();
   });
 })();
