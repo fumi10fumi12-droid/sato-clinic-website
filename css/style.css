@@ -319,6 +319,8 @@ h1,h2,h3 {font-weight:800}
 .home-overview .schedule-panel {margin:0;width:610px}
 .home-services .schedule-inner,.clinic-footer .schedule-inner {height:100%;display:flex;flex-direction:column;padding:16px 18px;}
 .home-services .hours-table,:is(.clinic-footer,.home-overview) .hours-table {flex:1;}
+.home-services .hours-table {flex:0 0 auto;}
+.home-services .clinic-info-list {margin-top:24px;}
 .reservation-preview {display:flex;flex-direction:column;min-height:385px;background:#fff;border:1px solid #d1dfed;border-radius:8px;padding:16px 18px;color:#23466c;font-family:inherit;}
 .reservation-head {display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #c8d9ea;padding-bottom:12px;color:#23466c;}
 .reservation-head strong {margin-bottom:0;}

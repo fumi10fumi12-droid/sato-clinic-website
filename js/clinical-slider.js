@@ -8,6 +8,15 @@
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let current = 0;
     let scrollTimer;
+    const interval = Number(slider.dataset.autoplay) || 0;
+    let autoplayTimer;
+    let paused = reducedMotion.matches;
+    const schedule = () => {
+      window.clearTimeout(autoplayTimer);
+      if (interval && !paused && !document.hidden) {
+        autoplayTimer = window.setTimeout(() => goTo(current + 1), interval);
+      }
+    };
 
     const update = () => {
       if (!track.clientWidth) return;
@@ -18,6 +27,7 @@
       });
     };
     const goTo = (index) => {
+      schedule();
       if (!track.clientWidth) return;
       const next = (index + slides.length) % slides.length;
       track.scrollTo({left: next * track.clientWidth, behavior: reducedMotion.matches ? 'instant' : 'smooth'});
@@ -56,5 +66,27 @@
     else window.addEventListener('resize', resize);
     controls.hidden = false;
     update();
+    if (interval) {
+      slides.forEach(slide => { slide.querySelector('img').loading = 'eager'; });
+      const autoplay = document.createElement('button');
+      autoplay.type = 'button';
+      autoplay.className = 'clinical-slider-autoplay';
+      const updateAutoplay = () => {
+        autoplay.textContent = paused ? '自動再生する' : '一時停止';
+        autoplay.setAttribute('aria-label', paused ? '写真の自動再生を開始' : '写真の自動再生を一時停止');
+        schedule();
+      };
+      autoplay.addEventListener('click', () => {
+        paused = !paused;
+        updateAutoplay();
+      });
+      controls.append(autoplay);
+      document.addEventListener('visibilitychange', schedule);
+      reducedMotion.addEventListener('change', () => {
+        if (reducedMotion.matches) { paused = true; updateAutoplay(); }
+      });
+      track.addEventListener('pointerup', schedule);
+      updateAutoplay();
+    }
   });
 })();
