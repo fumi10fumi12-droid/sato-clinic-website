@@ -26,8 +26,8 @@ h1,h2,h3 {font-weight:800}
 .2px 78px;}
 .site-brand {display:flex;align-items:center;gap:16px;min-width:0;}
 .site-logo {width:220px;display:block;flex-shrink:0;}
-.department-badges {display:flex;flex-wrap:wrap;align-content:center;gap:6px;margin:0;padding:0;list-style:none;min-width:0;}
-.department-badges li {padding:4px 9px;border-radius:4px;background:#345f91;color:#fff;font-size:calc(12px * var(--text-scale,1));font-weight:500;line-height:1.5;}
+.department-badges {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;align-content:center;gap:6px;flex:1;width:360px;max-width:360px;margin:0;padding:0;list-style:none;min-width:0;}
+.department-badges li {display:flex;align-items:center;justify-content:center;text-align:center;text-wrap:balance;overflow-wrap:anywhere;padding:4px 3px;border-radius:4px;background:#345f91;color:#fff;font-size:calc(12px * var(--text-scale,1));font-weight:500;line-height:1.5;}
 .site-logo img {width:220px;height:66px;object-fit:contain;object-position:left center;}
 .site-phone {display:inline-flex;align-items:center;justify-content:flex-end;gap:10px;font-family:inherit;font-size:calc(26px * var(--text-scale, 1));font-weight:700;line-height:1.3;letter-spacing:.02em;color:#303943;white-space:nowrap;}
 .site-phone svg {width:30px;height:30px;padding:7px;border-radius:50%;background:var(--header-blue);color:#fff;flex-shrink:0;fill:currentColor;}
@@ -148,6 +148,7 @@ h1,h2,h3 {font-weight:800}
 .faq-group-intro::after {content:'';position:absolute;inset:0;background:linear-gradient(90deg,#edf5fc 0%,rgba(237,245,252,.97) 35%,rgba(237,245,252,.7) 65%,rgba(237,245,252,.2));z-index:0;}
 .faq-group-intro--clear::after {display:none;}
 .faq-group-intro--fade .faq-group-photo {-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 45%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 45%,#000 100%);}
+.faq-group-intro--payment .faq-group-photo {-webkit-mask-image:linear-gradient(90deg,transparent 50%,#000 100%);mask-image:linear-gradient(90deg,transparent 50%,#000 100%);}
 .faq-group-intro h2 {position:relative;z-index:1;max-width:70%;margin-bottom:0;}
 .faq-group-photo {position:absolute;right:0;top:0;width:65%;height:100%;object-fit:cover;object-position:right 20%;z-index:0;}
 .faq-item {margin:0 0 18px;border-radius:12px;background:#edf5fc;overflow:hidden;}
@@ -218,17 +219,45 @@ h1,h2,h3 {font-weight:800}
 .clinic-access-photo {flex:1;height:0;min-height:240px;}
 .footer-copyright {display:block;text-align:center;font-family:inherit;font-size:calc(16px * var(--text-scale, 1));margin-top:40px;padding-top:20px;border-top:1px solid #d4e0ec;color:#4b6076;}
 .page-hours .page-title {margin-bottom:73px;}
-.page-hours .clinic-footer {margin-top:0;}
-.clinic-footer .clinic-columns--access-first {row-gap:var(--item-gap);}
+.page-hours .clinic-footer {margin-top:64px;}
+.clinic-footer .clinic-columns--access-first {row-gap:48px;}
+.clinic-footer .clinic-columns--access-first > .clinic-access-details {display:block;}
+.clinic-columns--access-first .clinic-access-note {margin-bottom:0;padding:24px;border-radius:14px;}
+.clinic-columns--access-first .clinic-contact-box {margin-top:0;padding:24px;min-width:0;}
+@media screen and (max-width:767px) {
+  .clinic-footer .clinic-columns--access-first {row-gap:32px;}
+  .clinic-footer .clinic-columns--access-first > .clinic-access-details {display:flex;gap:0;}
+}
 @media screen and (min-width:1101px) {
-  .clinic-columns--access-first {grid-template-areas:"details map" "hours reservation";}
-  .clinic-columns--access-first > .clinic-access-details {grid-area:details;}
+  .clinic-columns--access-first {grid-template-areas:"details map" "reservation contact" "hours photo";}
+  .clinic-columns--access-first > .clinic-photo-card {grid-area:photo;position:relative;align-self:stretch;min-width:0;min-height:240px;}
+  .clinic-columns--access-first > .clinic-photo-card .clinic-access-photo {position:absolute;inset:0;width:100%;height:100%;min-height:0;aspect-ratio:auto;object-fit:cover;object-position:center;}
+  .clinic-columns--access-first > .clinic-contact-box {grid-area:contact;align-self:stretch;}
   .clinic-columns--access-first > .clinic-access {grid-area:map;}
+  .clinic-columns--access-first > .clinic-access-details {grid-area:details;}
+  .clinic-columns--access-first .footer-map {flex:1;height:0;min-height:320px;}
+  .clinic-columns--access-first .map-directions {margin-bottom:0;}
   .clinic-columns--access-first > .clinic-hours {grid-area:hours;display:block;}
   .clinic-columns--access-first > .clinic-right {grid-area:reservation;display:block;}
   .clinic-columns--access-first .clinic-reservation {display:block;}
   .clinic-columns--access-first :is(.clinic-hours,.clinic-reservation) > .clinic-section-title {margin-bottom:28px;}
   .clinic-columns--access-first .clinic-info-list {margin-top:24px;}
+}
+/* 下部カード：左右の外枠と余白を統一 */
+.clinic-footer .clinic-columns--access-first > :is(.clinic-access-details,.clinic-access,.clinic-right,.clinic-contact-box,.clinic-hours,.clinic-photo-card) {align-self:stretch;min-width:0;padding:24px;background:#fff;border:1px solid #d4e0ec;border-radius:14px;}
+.clinic-footer .clinic-columns--access-first .clinic-access-note {padding:0;background:transparent;}
+.clinic-footer .clinic-access-note .clinic-access-address {font-size:calc(18px * var(--text-scale,1));line-height:1.9;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid #d4e0ec;}
+.clinic-footer .clinic-reservation .reservation-preview {flex:1;min-height:0;padding:0;border:0;background:transparent;}
+.clinic-footer .schedule-inner {padding:0;border:0;background:transparent;}
+.clinic-footer .hours-table {min-width:0;}
+.clinic-footer .clinic-columns--access-first > .clinic-photo-card {padding:0;overflow:hidden;}
+.clinic-footer .clinic-photo-card .clinic-access-photo {border:0;border-radius:0;aspect-ratio:1;}
+@media screen and (min-width:1101px) {
+  .clinic-columns--access-first .clinic-right .clinic-reservation {display:flex;flex-direction:column;min-height:100%;}
+}
+@media screen and (max-width:767px) {
+  .clinic-footer .clinic-columns--access-first > :is(.clinic-access-details,.clinic-access,.clinic-right,.clinic-contact-box,.clinic-hours) {padding:20px;}
+  .clinic-footer .clinic-access-note .clinic-access-address {font-size:calc(16px * var(--text-scale,1));}
 }
 /* トップページ */
 .hero {width:100%;height:calc((100vh - var(--site-header-height, 132px)) / var(--site-scale));height:calc((100svh - var(--site-header-height, 132px)) / var(--site-scale));margin:0;position:relative;overflow:hidden;background:#aec6d6;}
@@ -293,11 +322,9 @@ h1,h2,h3 {font-weight:800}
 .home-stack .intro-photo {width:530px;height:315px;object-fit:cover;margin:0 auto 36px}
 .home-stack p {font-size:calc(20px * var(--text-scale, 1));line-height:1.55;margin-bottom:26px}
 .home-stack .signoff {text-align:right}
-.home-greeting {width:1200px;margin-top:calc(var(--section-gap) / 2 + 20px);}
+.home-greeting {width:1200px;margin-top:var(--section-gap);}
 .home-greeting > h2 {margin-bottom:48px;}
 .director-profile {display:grid;grid-template-columns:480px minmax(0,1fr);gap:48px;align-items:stretch;}
-.director-profile.is-revealed {animation:staff-slide-in 3s ease-in-out both;}
-@media (prefers-reduced-motion:reduce) {.director-profile.is-revealed {animation:none;}}
 .director-photo-wrap {position:relative;min-height:640px;overflow:hidden;}
 .director-photo {position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:calc(67.5% - 84px) center;}
 .director-details {padding:36px 38px;background:#fff;box-shadow:0 3px 18px rgba(36,63,86,.13);color:#30383d;}
@@ -307,7 +334,7 @@ h1,h2,h3 {font-weight:800}
 .director-details h4 {font-size:calc(20px * var(--text-scale, 1));font-weight:500;margin:30px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--header-blue);}
 .home-greeting .director-details p:last-child {margin-bottom:0;}
 .director-career-line {white-space:nowrap;}
-.home-medical {width:1200px;margin-top:calc(var(--section-gap) / 2);}
+.home-medical {width:1200px;margin-top:var(--section-gap);}
 .home-medical > h2 {margin-bottom:48px;}
 .home-medical > p {max-width:900px;margin-left:auto;margin-right:auto;}
 .home-medical > p:first-of-type {margin-bottom:6px;}
@@ -317,17 +344,16 @@ h1,h2,h3 {font-weight:800}
 .home-medical .medical-entry p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin:0;}
 .home-medical .medical-entry:not(:has(.medical-entry-photo)) {grid-template-columns:minmax(0,1fr);}
 .home-medical .more-button {margin-top:36px;}
-.home-about {width:1200px;margin-top:calc(var(--section-gap) / 2);}
+.home-about {width:1200px;margin-top:var(--section-gap);}
 .home-about > h2 {margin-bottom:48px;}
 .home-about-feature {display:grid;grid-template-columns:minmax(0,1fr) 540px;gap:60px;align-items:center;padding:40px;background:#fff;}
 .home-about .home-about-photo {width:540px;height:auto;border-radius:14px;}
 .home-about .more-button {width:100%;margin:30px 0 0;border:1px solid var(--header-blue);border-radius:6px;font-size:calc(18px * var(--text-scale, 1));}
 .home-about .home-about-text p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;}
-.home-staff {width:1200px;margin-top:calc(var(--section-gap) / 2);}
-.home-staff > p {max-width:none;margin:0 auto 60px;text-align:center;white-space:nowrap;}
+.home-staff,.home-faq {width:1200px;margin-top:var(--section-gap);}
+.home-staff > p,.home-faq > p {max-width:none;margin:0 auto 60px;text-align:center;white-space:nowrap;}
 .home-staff .staff-card p {font-size:calc(18px * var(--text-scale, 1));line-height:1.9;margin-bottom:18px;}
 .home-staff .staff-details p:last-child {margin-bottom:0;}
-.home-faq {margin-top:var(--section-gap)}
 .home-faq .more-button {margin-bottom:45px}
 .home-faq .intro-photo {width:480px;height:520px;object-fit:cover;object-position:20% center;}
 /* ページ最上部へ戻る */
@@ -384,7 +410,7 @@ h1,h2,h3 {font-weight:800}
   .director-profile,.staff-card {grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:28px;}
   .staff-card img {width:100%;}
   .director-details,.staff-details {padding:28px;min-width:0;}
-  .director-career-line,.home-staff > p {white-space:normal;}
+  .director-career-line,.home-staff > p,.home-faq > p {white-space:normal;}
   .clinic-columns {gap:28px;}
   .clinic-info-row {grid-template-columns:80px minmax(0,1fr);gap:16px;}
   .clinic-contact-line {flex-wrap:wrap;}
@@ -477,7 +503,7 @@ h1,h2,h3 {font-weight:800}
   .staff-card {gap:0;}
   .staff-card img {height:auto;aspect-ratio:6 / 5;border-radius:12px 12px 0 0;}
   .staff-details {border-radius:0 0 12px 12px;}
-  .home-staff > p,.staff-lead {white-space:normal;text-align:left;margin-bottom:28px;}
+  .home-staff > p,.home-faq > p,.staff-lead {white-space:normal;text-align:left;margin-bottom:28px;}
   .more-button,.home-about .more-button {width:100%;max-width:380px;min-height:48px;line-height:1.6;padding:13px 16px;font-size:calc(16px * var(--text-scale,1));}
   .home-faq .intro-photo {width:100%;height:auto;aspect-ratio:6 / 5;}
   .photo-gallery {margin-block:var(--section-gap);}
@@ -523,6 +549,220 @@ h1,h2,h3 {font-weight:800}
   .schedule-note p {font-size:inherit;line-height:1.8;}
   .back-to-top {width:48px;height:48px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));}
   /* 横移動アニメーションによる画面外へのはみ出しを防ぐ */
-  .director-profile.is-revealed,.home-staff .staff-card.is-revealed,.page-about .staff-card.is-revealed {animation-name:about-float-in;animation-duration:1.2s;}
+  .home-staff .staff-card.is-revealed,.page-about .staff-card.is-revealed {animation-name:about-float-in;animation-duration:1.2s;}
 }
 @media print { body{background:#fff}.global-nav a{font-size:calc(16px * var(--text-scale, 1))}.more-button{border:1px solid #ccc} }
+/* 共通ナビゲーション：ページリンクと詳細メニューの開閉を分離 */
+.global-nav > .nav-item {flex:1;min-width:0;border-right:1px solid #ffffff59;}
+.global-nav > .nav-item:first-child {border-left:1px solid #ffffff59;}
+.global-nav > .nav-item:nth-child(2),.global-nav > .nav-item:nth-child(3) {flex:1.15;}
+.global-nav > .nav-item:nth-child(4) {flex:1.25;}
+.global-nav > .nav-item:nth-child(5) {flex:1.65;}
+.global-nav > .nav-item:nth-child(6) {flex:1.3;}
+.nav-parent {display:flex;align-items:stretch;height:100%;}
+.global-nav .nav-parent > a {flex:1;min-width:0;border:0;padding-inline:10px;}
+.nav-toggle {display:flex;align-items:center;justify-content:center;flex:0 0 36px;border:0;background:transparent;color:inherit;cursor:pointer;}
+.nav-toggle span {width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .2s;}
+.nav-item.is-submenu-open > .nav-parent {background:#2f649f;}
+.nav-item.is-submenu-open .nav-toggle span {transform:translateY(3px) rotate(225deg);}
+.nav-toggle:hover {background:#ffffff1a;}
+.nav-toggle:focus-visible {outline:2px solid #fff;outline-offset:-5px;}
+.mega-panel {position:absolute;top:100%;left:0;width:100%;border-top:1px solid #d9e4ef;border-bottom:1px solid #d9e4ef;background:#fff;color:#303b49;box-shadow:0 14px 24px #1836551c;opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s;max-height:calc(100dvh - var(--site-header-height,140px) - 24px);overflow-y:auto;overscroll-behavior:contain;}
+.nav-item.is-submenu-open > .mega-panel {opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;}
+.mega-inner {max-width:1284px;margin-inline:auto;padding:32px 40px 36px;}
+.global-nav .mega-panel a {font-family:inherit;white-space:normal;justify-content:flex-start;line-height:1.7;opacity:1;border:0;}
+.global-nav .mega-panel .mega-overview {display:flex;gap:18px;min-height:54px;padding:0 0 22px;margin:0 0 20px;border-bottom:1px solid #d9e4ef;color:#23466c;font-size:calc(25px * var(--text-scale,1));font-weight:700;}
+.mega-overview > span:not(.mega-overview-arrow) {font-size:calc(13px * var(--text-scale,1));font-weight:400;color:#63768a;}
+.mega-overview-arrow {display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin-left:auto;border-radius:50%;background:#e3f1fc;color:var(--header-blue);font-size:28px;}
+.mega-links {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 36px;list-style:none;margin:0;padding:0;}
+.mega-links li {min-width:0;}
+.global-nav .mega-links a {display:flex;align-items:center;gap:12px;min-height:60px;padding:12px 8px;font-size:calc(16px * var(--text-scale,1));border-radius:4px;}
+.mega-link-arrow {color:#91c6ec;font-size:26px;line-height:1;flex-shrink:0;}
+.global-nav .mega-panel a:hover {background:#f1f7fc;color:#235e9b;}
+.global-nav .mega-panel a:focus-visible {background:#f1f7fc;outline:2px solid var(--header-blue);outline-offset:-2px;}
+.menu-toggle::before {content:'';width:16px;height:12px;margin-right:8px;background:linear-gradient(currentColor,currentColor) top/100% 2px no-repeat,linear-gradient(currentColor,currentColor) center/100% 2px no-repeat,linear-gradient(currentColor,currentColor) bottom/100% 2px no-repeat;}
+.is-menu-open .menu-toggle::before {background:linear-gradient(45deg,transparent 45%,currentColor 45%,currentColor 55%,transparent 55%),linear-gradient(-45deg,transparent 45%,currentColor 45%,currentColor 55%,transparent 55%);height:16px;}
+@media screen and (min-width:768px) and (max-width:1100px) {
+  .global-nav .nav-parent > a {font-size:calc(14px * var(--text-scale,1));padding-inline:6px;}
+  .nav-toggle {flex-basis:28px;}
+  .mega-inner {padding:28px 32px;}
+  .mega-links {grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px;}
+}
+@media screen and (max-width:767px) {
+  .menu-toggle {display:flex;align-items:center;justify-content:center;}
+  .global-nav {display:block;}
+  .global-nav > .nav-item,.global-nav > .nav-item:first-child {border:0;border-top:1px solid #ffffff38;}
+  .nav-parent {height:auto;min-height:52px;}
+  .global-nav .nav-parent > a {justify-content:flex-start;text-align:left;padding:14px 20px;}
+  .nav-toggle {flex-basis:56px;min-height:52px;border-left:1px solid #ffffff38;}
+  .mega-panel {position:static;max-height:none;box-shadow:none;transform:none;overflow:hidden;display:grid;grid-template-rows:0fr;border:0;transition:grid-template-rows .2s,opacity .2s,visibility .2s;}
+  .nav-item.is-submenu-open > .mega-panel {grid-template-rows:1fr;}
+  .mega-inner {min-height:0;overflow:hidden;max-width:none;margin:0;padding:0 20px;}
+  .global-nav .mega-panel .mega-overview {padding:18px 4px 14px;margin-bottom:8px;font-size:calc(18px * var(--text-scale,1));gap:10px;}
+  .mega-overview-arrow {width:30px;height:30px;font-size:24px;}
+  .mega-links {grid-template-columns:minmax(0,1fr);gap:0;padding-bottom:16px;}
+  .global-nav .mega-links a {min-height:48px;padding:12px 4px;text-align:left;font-size:calc(14px * var(--text-scale,1));}
+  .mega-panel a {border:0;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .mega-panel,.nav-toggle span {transition:none;}
+}
+@media print {
+  .mega-panel,.nav-toggle,.menu-toggle {display:none;}
+}
+
+/* 本文の見出しに共通の区切り線を配置（下部カードは対象外） */
+.page-main .section-rule {position:relative;border:0;border-bottom:1px solid #b9cad6;padding:0 0 24px;margin-bottom:32px;}
+.page-main .faq-group-intro .section-rule {margin-bottom:0;}
+@media screen and (max-width:767px) {
+  .page-main .section-rule {padding-bottom:18px;margin-bottom:24px;}
+  .page-main .faq-group-intro .section-rule {margin-bottom:0;}
+}
+
+/* 項目の区切り：細い横線と短いブランドカラーのアクセント */
+:is(body.page-home,.preview-page.page-home) .page-main .section-rule {position:relative;text-align:left;border:0;border-bottom:1px solid #b9cad6;padding:0 0 28px;margin-bottom:56px;}
+:is(body.page-home,.preview-page.page-home) .page-main .section-rule::after {content:'';position:absolute;left:0;bottom:-1px;width:64px;height:3px;background:var(--header-blue);}
+:is(body.page-home,.preview-page.page-home) .page-main :is(.news-article,.medical-entry,.about-text,.staff-card) .section-rule {padding-bottom:22px;margin-bottom:32px;}
+:is(body.page-home,.preview-page.page-home) .page-main .home-news .section-rule {margin-bottom:20px;}
+:is(body.page-home,.preview-page.page-home) .page-main .home-news .section-rule::after {left:0;bottom:-1px;width:64px;height:3px;}
+:is(body.page-home,.preview-page.page-home) .page-main .faq-group-intro .section-rule {margin-bottom:0;padding-bottom:22px;}
+@media screen and (max-width:767px) {
+  :is(body.page-home,.preview-page.page-home) .page-main .section-rule {padding-bottom:20px;margin-bottom:32px;}
+  :is(body.page-home,.preview-page.page-home) .page-main .section-rule::after {width:48px;}
+  :is(body.page-home,.preview-page.page-home) .page-main :is(.news-article,.medical-entry,.about-text,.staff-card) .section-rule {padding-bottom:18px;margin-bottom:24px;}
+  :is(body.page-home,.preview-page.page-home) .page-main .faq-group-intro .section-rule {margin-bottom:0;}
+}
+
+/* トップの主要見出しは中央寄せで仕切り線の上へ配置 */
+:is(body.page-home,.preview-page.page-home) .page-main :is(.home-stack,.home-news) > h2.section-rule {display:block;text-align:center;border:0;border-bottom:1px solid #b9cad6;padding:0 0 28px;}
+:is(body.page-home,.preview-page.page-home) .page-main :is(.home-stack,.home-news) > h2.section-rule::before,
+:is(body.page-home,.preview-page.page-home) .page-main :is(.home-stack,.home-news) > h2.section-rule::after {display:none;}
+@media screen and (max-width:767px) {
+  :is(body.page-home,.preview-page.page-home) .page-main :is(.home-stack,.home-news) > h2.section-rule {padding-bottom:20px;}
+}
+
+/* サイトマップ */
+.sitemap-content {width:calc(100% - 64px);max-width:1200px;padding-top:48px;}
+.sitemap-intro {font-size:calc(18px * var(--text-scale,1));line-height:1.9;margin-bottom:32px;}
+.sitemap-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:start;}
+.sitemap-card {min-width:0;padding:28px;background:#fff;border:1px solid #d4e0ec;border-radius:14px;}
+.sitemap-card h2 {font-size:calc(24px * var(--text-scale,1));line-height:1.5;}
+.sitemap-card a:focus-visible {outline:2px solid var(--header-blue);outline-offset:3px;}
+.sitemap-card h2 a {color:#23466c;}
+.sitemap-links {list-style:none;margin:0;padding:0;}
+.sitemap-links a {display:flex;gap:10px;align-items:center;min-height:48px;padding:10px 0;font-size:calc(16px * var(--text-scale,1));line-height:1.7;color:#303b49;}
+.sitemap-links a:hover {color:var(--header-blue);}
+@media screen and (max-width:1100px) {.sitemap-grid {grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media screen and (max-width:767px) {
+ .sitemap-content {width:calc(100% - 32px);max-width:560px;padding-top:24px;}
+ .sitemap-grid {grid-template-columns:minmax(0,1fr);gap:24px;}
+ .sitemap-card {padding:24px;}
+ .sitemap-card h2 {font-size:calc(22px * var(--text-scale,1));}
+}
+
+.news-published {display:block;margin-bottom:14px;color:#64758a;font-size:calc(14px * var(--text-scale,1));line-height:1.6;letter-spacing:.08em;font-variant-numeric:tabular-nums;}
+
+/* トップのお知らせ：掲載日と最新記事の表示 */
+.home-news .news-row {grid-template-columns:210px minmax(0,1fr);align-items:center;}
+.news-meta {display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;}
+.news-row-date {font-size:calc(14px * var(--text-scale,1));color:#64758a;letter-spacing:.04em;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.home-news .news-meta .news-category {margin:0;}
+.news-new {display:inline-block;margin-left:12px;padding:2px 8px;border-radius:4px;color:#ae3d38;background:#fff0ed;font-size:calc(12px * var(--text-scale,1));font-weight:700;line-height:1.5;vertical-align:middle;}
+@media screen and (max-width:767px) {
+  .home-news .news-row {grid-template-columns:minmax(0,1fr);gap:10px;}
+}
+
+.news-article .news-published {display:inline-block;}
+.news-article .news-new {margin-bottom:14px;}
+
+/* トップでよく確認される質問を3件表示 */
+.home-faq .faq-item {background:#fff;border:1px solid #d4e0ec;}
+.home-faq .faq-answer p {font-size:calc(18px * var(--text-scale,1));line-height:1.9;margin:4px 0 0;}
+@media screen and (max-width:767px) {
+  .home-faq .faq-answer p {font-size:calc(16px * var(--text-scale,1));line-height:1.85;}
+}
+
+/* トップのFAQ下：笑顔の写真5枚を切り替える */
+.home-faq-slider {width:100%;max-width:960px;margin:0 auto;}
+.home-faq-slider .clinical-slider-track {width:100%;max-width:none;}
+.home-faq-slider figure {margin:0;overflow:hidden;}
+.home-faq-slider .gallery-photo {display:block;width:100%;height:auto;aspect-ratio:7 / 4;object-fit:cover;}
+@media screen and (max-width:767px) {
+ .home-faq-slider .clinical-slider-controls {gap:8px;}
+}
+
+/* 診療科目6項目を3列・2段で表示 */
+@media screen and (min-width:768px) and (max-width:1100px) {
+  .site-brand {grid-column:1 / -1;grid-row:1;}
+  .header-contact {grid-column:1;grid-row:2;}
+  .header-utilities {grid-column:2;grid-row:2;}
+}
+@media screen and (max-width:767px) {
+  .site-brand {display:grid;grid-template-columns:minmax(0,1fr);gap:12px;}
+  .department-badges {width:100%;max-width:none;}
+  .department-badges li {font-size:calc(11px * var(--text-scale,1));}
+}
+
+/* 笑顔の写真：中央から左右に開くスプリットリビール */
+.home-faq-slider.is-split-ready .clinical-slider-track {position:relative;display:block;aspect-ratio:7 / 4;overflow:hidden;scroll-snap-type:none;touch-action:pan-y;isolation:isolate;}
+.home-faq-slider.is-split-ready figure {position:absolute;inset:0;width:100%;height:100%;visibility:hidden;opacity:0;}
+.home-faq-slider.is-split-ready figure.is-active {visibility:visible;opacity:1;}
+.home-faq-slider.is-split-ready .gallery-photo {width:100%;height:100%;aspect-ratio:auto;object-fit:cover;user-select:none;-webkit-user-drag:none;}
+.split-reveal-shutter {position:absolute;inset:0;z-index:1;pointer-events:none;will-change:transform;}
+.split-reveal-shutter--left {clip-path:inset(0 50% 0 0);}
+.split-reveal-shutter--right {clip-path:inset(0 0 0 50%);}
+.home-faq-slider :is(button,.clinical-slider-track):focus-visible {outline:3px solid var(--header-blue);outline-offset:-3px;}
+
+/* 院長挨拶の写真：画面に入ると穏やかに回転しながらフェードイン */
+.home-greeting .director-photo-wrap.is-revealed .director-photo {animation:director-rotate-fade 1.2s cubic-bezier(.22,1,.36,1) both;transform-origin:center;}
+@keyframes director-rotate-fade {
+ from {opacity:0;transform:rotate(-6deg) scale(1.2);}
+ to {opacity:1;transform:rotate(0deg) scale(1);}
+}
+@media (prefers-reduced-motion:reduce),print {
+ .home-greeting .director-photo-wrap.is-revealed .director-photo {animation:none;opacity:1;transform:none;}
+}
+
+/* フッターの方針・サイト案内リンク */
+.footer-policy-links {display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px 32px;margin-top:40px;padding-top:20px;border-top:1px solid #d4e0ec;color:#345b82;}
+.footer-policy-links a {display:flex;align-items:center;justify-content:center;min-height:44px;font-size:calc(15px * var(--text-scale,1));line-height:1.7;text-align:center;text-underline-offset:4px;}
+.footer-policy-links a:hover {text-decoration:underline;}
+.footer-policy-links a:focus-visible {outline:2px solid var(--header-blue);outline-offset:4px;}
+.footer-policy-links + .footer-copyright {margin-top:16px;padding-top:0;border-top:0;}
+@media screen and (max-width:767px) {
+ .footer-policy-links {flex-direction:column;gap:0;}
+ .footer-policy-links a {width:100%;}
+}
+
+/* 方針ページ：本文が読みやすい一段のレイアウト */
+.policy-content {width:calc(100% - 64px);max-width:1040px;padding-top:48px;}
+.policy-document {padding:48px;background:#fff;border:1px solid #d4e0ec;border-radius:14px;}
+.policy-meta {display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:calc(14px * var(--text-scale,1));color:#64758a;}
+.policy-draft-label {padding:3px 12px;border-radius:4px;color:#345b82;background:#edf5fc;}
+.policy-document p,.policy-document dd {font-size:calc(18px * var(--text-scale,1));line-height:1.9;overflow-wrap:anywhere;}
+.policy-document .policy-intro {margin:24px 0 40px;}
+.policy-section + .policy-section {margin-top:40px;}
+.policy-section h2 {font-size:calc(25px * var(--text-scale,1));line-height:1.6;color:#23466c;}
+.policy-section p:last-child {margin-bottom:0;}
+.policy-document a {color:#2867a6;text-decoration:underline;text-underline-offset:4px;}
+.policy-document a:focus-visible {outline:2px solid var(--header-blue);outline-offset:3px;}
+.policy-storage {margin:24px 0 0;}
+.policy-storage > div {display:grid;grid-template-columns:140px minmax(0,1fr);gap:20px;padding:16px 0;border-top:1px solid #d4e0ec;}
+.policy-storage dt {font-weight:700;font-size:calc(16px * var(--text-scale,1));}
+.policy-storage dd {margin:0;}
+@media screen and (max-width:767px) {
+ .policy-content {width:calc(100% - 32px);max-width:560px;padding-top:24px;}
+ .policy-document {padding:24px 20px;}
+ .policy-document p,.policy-document dd {font-size:calc(16px * var(--text-scale,1));}
+ .policy-section h2 {font-size:calc(22px * var(--text-scale,1));}
+ .policy-storage > div {grid-template-columns:minmax(0,1fr);gap:8px;}
+}
+
+/* トップの医院紹介：増えた本文に合わせて写真を拡大 */
+@media screen and (min-width:768px) {
+ .home-about-feature {align-items:stretch;}
+ .home-about .home-about-photo {height:100%;min-height:360px;object-fit:cover;object-position:center;}
+}
+@media screen and (max-width:767px) {
+ .home-about .home-about-photo {aspect-ratio:6 / 5;object-fit:cover;object-position:center;}
+}

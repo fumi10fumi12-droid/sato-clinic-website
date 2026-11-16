@@ -50,12 +50,13 @@ assert.equal(slotStatus('2026-11-13', '09:00', '未登録科目', now), 'closed'
 assert.equal(slotStatus('2026-02-30', '09:00', departments[0], now), 'closed');
 
 let forms = 0;
-for (const file of ['index.html', 'news.html', 'medical.html', 'about.html', 'hours.html', 'faq.html']) {
+for (const file of ['index.html', 'news.html', 'medical.html', 'about.html', 'hours.html', 'faq.html', 'sitemap.html', 'privacy.html', 'cookie-policy.html']) {
   const html = fs.readFileSync(path.join(root, file), 'utf8');
   const entries = [...html.matchAll(/<form class="reservation-preview"[\s\S]*?<\/form>/g)];
   assert.equal(entries.length, file === 'index.html' ? 2 : 1);
   forms += entries.length;
   entries.forEach(([entry]) => {
+    departments.forEach(department => assert(entry.includes('<option>' + department + '</option>'), file + ': ' + department));
     assert(entry.includes('実際の予約は登録されません'));
     assert(entry.includes('空き状況を確認して予約する'));
     assert(!entry.includes('name="consultation"'));
@@ -65,5 +66,5 @@ for (const file of ['index.html', 'news.html', 'medical.html', 'about.html', 'ho
   assert(!html.includes('./js/reservation-calendar.js'));
   assert(!html.includes('./js/reservation-confirmation.js'));
 }
-assert.equal(forms, 7);
-console.log('Booking checks passed: JST dates, week changes, leap/year boundaries, stable sample slots, closed days, Saturday afternoon, past times, 7 form entry points.');
+assert.equal(forms, 10);
+console.log('Booking checks passed: JST dates, week changes, leap/year boundaries, stable sample slots, closed days, Saturday afternoon, past times, 10 form entry points.');

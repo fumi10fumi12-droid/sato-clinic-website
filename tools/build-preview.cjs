@@ -9,6 +9,9 @@ const pages = [
   ['about.html', 'page-about', '当院について'],
   ['hours.html', 'page-hours', '診療時間・所在地'],
   ['faq.html', 'page-faq', 'よくある質問'],
+  ['sitemap.html', 'page-sitemap', 'サイトマップ'],
+  ['privacy.html', 'page-privacy', '個人情報保護方針'],
+  ['cookie-policy.html', 'page-cookie-policy', 'クッキーポリシー'],
 ];
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const scripts = new Set();
@@ -19,7 +22,7 @@ function prepare(html) {
     scripts.add(file);
     return '';
   });
-  html = html.replace(/href="((?:index|news|medical|about|hours|faq)\.html)(#[^"]*)?"/g, (_, file, hash) => {
+  html = html.replace(/href="((?:index|news|medical|about|hours|faq|sitemap|privacy|cookie-policy)\.html)(#[^"]*)?"/g, (_, file, hash) => {
     const [, id] = pages.find((page) => page[0] === file);
     return `href="#${id}"${hash ? ` data-preview-target="${hash.slice(1)}"` : ''}`;
   });
@@ -46,18 +49,13 @@ const navigation = `
 (() => {
   const updateNavigation = () => {
     const current = location.hash.startsWith('#page-') ? location.hash : '#page-home';
-    document.querySelectorAll('.global-nav a').forEach((link) => {
+    document.querySelectorAll('.global-nav .nav-parent > a').forEach((link) => {
       if (link.getAttribute('href') === current) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
   };
   window.addEventListener('hashchange', updateNavigation);
   updateNavigation();
-  document.querySelector('.back-to-top').addEventListener('click', (event) => {
-    event.preventDefault();
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
-    window.scrollTo({top: 0, behavior});
-  });
   document.querySelectorAll('[data-preview-target]').forEach((link) => {
     link.addEventListener('click', () => requestAnimationFrame(() => {
       document.getElementById(link.dataset.previewTarget)?.scrollIntoView();
@@ -67,7 +65,7 @@ const navigation = `
 </script>`;
 const output = `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>佐藤医院｜全6ページ プレビュー</title><style>${css}
+<title>佐藤医院｜全${pages.length}ページ プレビュー</title><style>${css}
 .preview-page{display:none;}.preview-page.page-home{display:block;}
 .preview-pages:has(> .preview-page:target) > .preview-page{display:none;}
 .preview-pages:has(> .preview-page:target) > .preview-page:target{display:block;}

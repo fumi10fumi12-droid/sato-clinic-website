@@ -58,6 +58,7 @@ async function main() {
   const resize = async (width,height=900) => {
     await call('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width <= 767});
     await call('Emulation.setTouchEmulationEnabled',{enabled:width <= 767});
+    await evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
   };
   const navigate = async page => {
     await call('Page.navigate',{url:`file://${root}/${page}`});
@@ -100,14 +101,16 @@ async function main() {
         assert(Math.abs(heroBottom - 900) < 2, page + ' at ' + width + 'px: hero bottom ' + heroBottom);
         const footerOrder = await evaluate(`(() => {
           const footer = document.querySelector('.clinic-columns--access-first');
-          return ['.clinic-access-details','.clinic-access','.clinic-hours','.clinic-right'].map(selector => {
-            const r=footer.querySelector(selector).getBoundingClientRect();return {x:r.x,y:r.y};
+          return ['.clinic-access-details','.clinic-access','.clinic-right','.clinic-contact-box','.clinic-hours','.clinic-photo-card'].map(selector => {
+            const r=footer.querySelector(selector).getBoundingClientRect();return {x:r.x,y:r.y,bottom:r.bottom};
           });
         })()`);
         if(width >= 1101) {
-          assert(Math.abs(footerOrder[0].y-footerOrder[1].y)<1,'Address and map must align at the top');
-          assert(footerOrder[0].x<footerOrder[1].x,'Address must be to the left of the map');
-          assert(footerOrder[2].y>footerOrder[0].y,'Hours must appear below the access information');
+          assert(Math.abs(footerOrder[0].y-footerOrder[1].y)<1,'Clinic information and map must align');
+          assert(footerOrder[0].x<footerOrder[1].x,'Clinic information must be left of map');
+          assert(Math.abs(footerOrder[2].y-footerOrder[3].y)<1,'Reservation and contact must align');
+          assert(Math.abs(footerOrder[4].y-footerOrder[5].y)<1,'Hours and photo must align at top');
+          assert(Math.abs(footerOrder[4].bottom-footerOrder[5].bottom)<1,'Hours and photo must align at bottom');
         } else {
           assert(footerOrder.every((item,index) => index === 0 || item.y>footerOrder[index-1].y),'Mobile footer must follow the reading order');
         }
@@ -122,7 +125,7 @@ async function main() {
               const after = visible[i].getBoundingClientRect();
               const gap = after.top - before.bottom;
               const previous = visible[i-1];
-              const baseGap = previous.matches('.hero') || visible[i].matches('.home-greeting') ? 100 : previous.matches('.faq-item') ? 18 : visible[i].matches('.home-medical,.home-about,.home-staff,.clinical-gallery') || previous.matches('.news-article,.medical-intro,.medical-entry,.about-block,.staff-card,.faq-content') ? 80 : 160;
+              const baseGap = previous.matches('.hero') ? 100 : previous.matches('.faq-item') ? 18 : visible[i].matches('.clinical-gallery') || previous.matches('.news-article,.medical-intro,.medical-entry,.about-block,.staff-card,.faq-content') ? 80 : 160;
               const expectedGap = baseGap * Number(getComputedStyle(document.body).zoom || 1);
               if(Math.abs(gap - expectedGap) > 1) errors.push({before:visible[i-1].className,after:visible[i].className,gap});
             }
@@ -196,6 +199,8 @@ async function main() {
     await resize(width);
     await navigate('medical.html');
     await evaluate(`document.querySelector('.clinical-slider').scrollIntoView({block:'center'})`);
+    // Allow lazy images and the slider ResizeObserver to settle before interaction.
+    await delay(600);
     const status = () => evaluate(`document.querySelector('.clinical-slider-status').textContent`);
     assert.equal(await evaluate(`document.querySelectorAll('.clinical-slider-track figure').length`),6);
     await evaluate(`document.querySelector('[data-slide="next"]').click()`);
@@ -241,6 +246,8 @@ async function main() {
     await resize(width);
     await navigate('about.html');
     await evaluate(`document.querySelector('.interior-slider').scrollIntoView({block:'center'})`);
+    // Allow lazy images and the slider ResizeObserver to settle before interaction.
+    await delay(600);
     assert.equal(await evaluate(`document.querySelectorAll('#interior-slider-track figure').length`),3);
     await evaluate(`document.querySelector('.interior-slider [data-slide="next"]').click()`);
     await delay(200);

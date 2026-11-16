@@ -3,9 +3,9 @@
 
 【1. まず表示だけを確認する場合】
   OPEN_SatoClinic.html をダブルクリックしてください。
-  6ページのHTML / CSS / 画像が1つのHTMLに入っています。
+  9ページのHTML / CSS / 画像が1つのHTMLに入っています。
   npm・Live Serverは不要です。予約画面やスライド表示にはJavaScriptを使用します。
-  上のメニューで6ページの表示を切り替えられます。
+  上のメニューで9ページの表示を切り替えられます。
 
 【2. VS Code / Codex で編集する場合】
   ZIPを「展開（解凍）」してからフォルダーを開きます。
@@ -15,10 +15,13 @@
   about.html    当院について
   hours.html    診療時間・所在地
   faq.html      よくある質問
+  sitemap.html  サイトマップ
+  privacy.html  個人情報保護方針（草案）
+  cookie-policy.html クッキーポリシー（草案）
   css/style.css 共通スタイル
   img/          写真・ロゴ・地図
 
-  通常の6ページの画像は全て ./img/ 内を参照します。
+  通常の9ページの画像は全て ./img/ 内を参照します。
   index.html等は同じ階層にcss/とimg/を残して開いてください。
   表示用OPEN_SatoClinic.htmlは単体で開きますが、画像やCSSを修正するには各ソースを編集してください。
 
