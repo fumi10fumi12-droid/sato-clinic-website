@@ -22,13 +22,13 @@ h1,h2,h3 {font-weight:800}
 .menu-toggle {display:none;}
 .schedule-table-scroll {display:contents;}
 .site-header {position:sticky;top:0;z-index:200;width:100%;margin:0 auto;background:#fff;}
-.site-top {max-width:1440px;min-height:92.4px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) max-content max-content;align-items:center;gap:24px;padding:
-.2px 78px;}
+.site-top {min-height:102.4px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) max-content max-content;align-items:center;gap:24px;padding:5.2px max(30px,calc((100% - 1284px) / 2));}
 .site-brand {display:flex;align-items:center;gap:16px;min-width:0;}
-.site-logo {width:220px;display:block;flex-shrink:0;}
+.site-logo {width:250px;display:block;flex-shrink:0;}
 .department-badges {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;align-content:center;gap:6px;flex:1;width:360px;max-width:360px;margin:0;padding:0;list-style:none;min-width:0;}
 .department-badges li {display:flex;align-items:center;justify-content:center;text-align:center;text-wrap:balance;overflow-wrap:anywhere;padding:4px 3px;border-radius:4px;background:#345f91;color:#fff;font-size:calc(12px * var(--text-scale,1));font-weight:500;line-height:1.5;}
-.site-logo img {width:220px;height:66px;object-fit:contain;object-position:left center;}
+/* 画像内の左側29px（幅500px）の透明余白を相殺し、ロゴ本体をナビの左罫線に揃える。 */
+.site-logo img {width:250px;height:75px;object-fit:contain;object-position:left center;transform:translateX(-5.8%);}
 .site-phone {display:inline-flex;align-items:center;justify-content:flex-end;gap:10px;font-family:inherit;font-size:calc(26px * var(--text-scale, 1));font-weight:700;line-height:1.3;letter-spacing:.02em;color:#303943;white-space:nowrap;}
 .site-phone svg {width:30px;height:30px;padding:7px;border-radius:50%;background:var(--header-blue);color:#fff;flex-shrink:0;fill:currentColor;}
 .header-contact {display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
@@ -194,11 +194,14 @@ h1,h2,h3 {font-weight:800}
 .hours-table th {background:var(--header-blue);color:#fff;font-weight:600;}
 .hours-table th,.hours-table td {border:1px solid #c8d9ea;padding:9px 3px;text-align:center;}
 .hours-table th:first-child,.hours-table td:first-child {width:126px;text-align:left;padding-left:7px;font-size:calc(14px * var(--text-scale, 1));}
+.hours-table th:first-child {text-align:center;padding-inline:3px;}
 .hours-table td:first-child {background:#eaf2fb;font-weight:700;}
 .hours-table td {font-size:calc(20px * var(--text-scale, 1));font-weight:700;color:#23466c;line-height:1.1;}
 .hours-table td.dash {font-size:calc(20px * var(--text-scale, 1));font-weight:400;color:#5c6a79;}
 .schedule-note {border-top:1px solid #c8d9ea;font-size:calc(13px * var(--text-scale, 1));line-height:1.65;margin-top:12px;padding:10px 3px 0;}
 .schedule-note p {margin:3px 0;}
+.clinic-footer .schedule-note {font-size:calc(14px * var(--text-scale,1));line-height:calc(21.45px * var(--text-scale,1));letter-spacing:-.04em;}
+.clinic-footer .schedule-note p {line-height:inherit;}
 .footer-map {display:block;width:100%;height:320px;margin:0 0 12px;border-radius:14px;border:1px solid #d4e0ec;}
 .map-directions {display:block;align-self:flex-start;flex-shrink:0;margin:0 0 24px;color:#23466c;font-size:calc(16px * var(--text-scale, 1));line-height:1.6;text-decoration:underline;text-underline-offset:4px;}
 .clinic-access-photo {display:block;width:100%;height:auto;aspect-ratio:7 / 4;object-fit:cover;border-radius:14px;border:1px solid #d4e0ec;}
@@ -396,9 +399,9 @@ h1,h2,h3 {font-weight:800}
 /* 印刷 */
 /* 1440pxのPCデザインを維持し、画面が狭い場合だけ組み替える */
 @media screen and (max-width:1439px) {
-  .site-top {padding-inline:clamp(20px,4vw,60px);gap:20px;}
+  .site-top {gap:20px;}
   .site-brand {gap:12px;}
-  .site-logo,.site-logo img {width:170px;}
+  .site-logo,.site-logo img {width:195px;}
   .utility-nav {gap:12px;}
   :is(.page-content,.page-breadcrumb,.home-overview,.home-stack,.staff-section,.photo-gallery) {width:calc(100% - 64px);max-width:1200px;}
   .clinic-footer {width:calc(100% - 48px);padding:32px;}
@@ -421,8 +424,8 @@ h1,h2,h3 {font-weight:800}
   .hero-statement-line {white-space:normal;}
 }
 @media screen and (min-width:768px) and (max-width:1100px) {
-  .site-top {grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
-  .site-logo,.site-logo img {width:150px;}
+  .site-top {grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding-inline:16px;}
+  .site-logo,.site-logo img {width:175px;}
   .department-badges li {font-size:calc(11px * var(--text-scale,1));padding:3px 7px;}
   .utility-nav {flex-wrap:wrap;}
   .header-utilities {grid-column:2;grid-row:1 / span 2;justify-content:center;}
@@ -445,12 +448,12 @@ h1,h2,h3 {font-weight:800}
   html {scroll-padding-top:16px;}
   body {font-size:calc(16px * var(--text-scale,1));overflow-wrap:anywhere;}
   .site-header {position:relative;}
-  .site-top {grid-template-columns:minmax(0,1fr) auto;gap:10px 12px;padding:10px 16px;}
+  .site-top {grid-template-columns:minmax(0,1fr) auto;gap:10px 12px;padding:15px 16px;}
   .site-brand {grid-column:1 / -1;grid-row:1;gap:12px;}
-  .site-logo,.site-logo img {width:clamp(110px,calc(100vw - 210px),130px);max-width:100%;}
+  .site-logo,.site-logo img {width:clamp(130px,calc(100vw - 190px),150px);max-width:100%;}
   .department-badges {flex:1;gap:5px;}
   .department-badges li {padding:3px 6px;font-size:calc(12px * var(--text-scale,1));}
-  .site-logo img {height:48px;}
+  .site-logo img {height:56px;}
   .menu-toggle {display:block;grid-column:2;grid-row:3;min-height:44px;min-width:80px;padding:8px 12px;border:1px solid var(--header-blue);border-radius:6px;background:#fff;color:#23466c;font:inherit;font-size:14px;cursor:pointer;}
   .menu-toggle:focus-visible {outline:3px solid var(--header-blue);outline-offset:3px;}
   .header-contact {display:contents;}
@@ -547,6 +550,7 @@ h1,h2,h3 {font-weight:800}
   .schedule-inner h3,.reservation-head strong {font-size:calc(21px * var(--text-scale,1));}
   .schedule-note {font-size:calc(13px * var(--text-scale,1));}
   .schedule-note p {font-size:inherit;line-height:1.8;}
+  .clinic-footer .schedule-note {line-height:calc(23.4px * var(--text-scale,1));}
   .back-to-top {width:48px;height:48px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));}
   /* 横移動アニメーションによる画面外へのはみ出しを防ぐ */
   .home-staff .staff-card.is-revealed,.page-about .staff-card.is-revealed {animation-name:about-float-in;animation-duration:1.2s;}
@@ -765,4 +769,15 @@ h1,h2,h3 {font-weight:800}
 }
 @media screen and (max-width:767px) {
  .home-about .home-about-photo {aspect-ratio:6 / 5;object-fit:cover;object-position:center;}
+}
+
+/* ヘッダーの連絡先と住所をまとめて配置 */
+.header-contact {min-width:0;}
+.header-address {display:flex;justify-content:flex-end;align-items:baseline;flex-wrap:wrap;gap:0 10px;margin:0;color:#4b6076;font-style:normal;font-size:calc(12px * var(--text-scale,1));line-height:1.7;}
+.header-postal-code {white-space:nowrap;}
+@media screen and (min-width:768px) and (max-width:1100px) {
+ .header-address {justify-content:flex-start;}
+}
+@media screen and (max-width:767px) {
+ .header-address {grid-column:1 / -1;grid-row:4;justify-content:flex-start;padding-top:8px;border-top:1px solid #e1eaf2;}
 }
