@@ -147,6 +147,7 @@ h1,h2,h3 {font-weight:800}
 .faq-group-intro {position:relative;display:flex;align-items:center;min-height:220px;padding:32px;margin-bottom:24px;border-radius:12px;overflow:hidden;background:#edf5fc;isolation:isolate;}
 .faq-group-intro::after {content:'';position:absolute;inset:0;background:linear-gradient(90deg,#edf5fc 0%,rgba(237,245,252,.97) 35%,rgba(237,245,252,.7) 65%,rgba(237,245,252,.2));z-index:0;}
 .faq-group-intro--clear::after {display:none;}
+.faq-group-intro--fade .faq-group-photo {-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 45%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 45%,#000 100%);}
 .faq-group-intro h2 {position:relative;z-index:1;max-width:70%;margin-bottom:0;}
 .faq-group-photo {position:absolute;right:0;top:0;width:65%;height:100%;object-fit:cover;object-position:right 20%;z-index:0;}
 .faq-item {margin:0 0 18px;border-radius:12px;background:#edf5fc;overflow:hidden;}
