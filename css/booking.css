@@ -78,6 +78,16 @@
 .booking-dialog button:disabled {opacity:.4;cursor:not-allowed;}
 .booking-dialog :is(button,input,select,[tabindex="0"]):focus-visible,.booking-launch-field select:focus-visible {outline:3px solid #23466c;outline-offset:2px;}
 .booking-error {padding:12px 16px;border:1px solid #d7959b;border-radius:6px;background:#fff4f4;color:#963d49;font-size:calc(15px * var(--text-scale,1));line-height:1.8;}
+.booking-launch-manage {width:100%;min-height:44px;margin-top:12px;padding:10px 16px;border:1px solid var(--header-blue);border-radius:7px;background:#fff;color:#23466c;font:inherit;font-size:calc(15px * var(--text-scale,1));cursor:pointer;}
+.booking-launch-manage:hover,.booking-secondary:hover {background:#edf5fc;}
+.booking-launch-manage:focus-visible {outline:3px solid #23466c;outline-offset:2px;}
+.booking-record {padding:20px;margin:20px 0;border:1px solid #d6e4f2;border-radius:10px;background:#fff;}
+.booking-record p {white-space:pre-line;overflow-wrap:anywhere;line-height:1.8;}
+.booking-secondary,.booking-cancel {min-height:44px;padding:10px 20px;border:1px solid var(--header-blue);border-radius:24px;background:#fff;color:#23466c;font:inherit;cursor:pointer;}
+.booking-cancel {border-color:#aa5360;color:#963d49;}
+.booking-cancel:hover {background:#fff4f4;}
+.booking-record .booking-actions {flex-wrap:wrap;justify-content:flex-start;margin-top:20px;}
+.booking-management-message {color:#23466c;line-height:1.8;}
 .booking-finished {padding:20px 0 10px;text-align:center;}
 .booking-finished-icon {display:grid;place-items:center;width:72px;height:72px;margin:0 auto;border-radius:50%;background:#e2effb;color:var(--header-blue);font-size:36px;}
 .booking-finished p {font-size:calc(17px * var(--text-scale,1));line-height:2;margin-bottom:30px;}

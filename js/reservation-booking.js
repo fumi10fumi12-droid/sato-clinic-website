@@ -87,7 +87,13 @@
         <p class="booking-error" role="alert" hidden></p>
         <div class="booking-actions"><button type="button" class="booking-back">戻る</button><button type="submit" class="booking-next">次へ</button></div>
       </form>
-      <section class="booking-finished" hidden><div class="booking-finished-icon" aria-hidden="true">✓</div><h3>入力内容の確認が完了しました</h3><p>実際の予約は登録されていません。<br>受診のご予約はお電話でお問い合わせください。</p><button type="button" class="booking-finish-close">閉じる</button></section>
+      <section class="booking-finished" hidden><div class="booking-finished-icon" aria-hidden="true">✓</div><h3>入力内容の確認が完了しました</h3><p>実際の予約は登録されていません。<br>受診のご予約はお電話でお問い合わせください。</p><div class="booking-actions"><button type="button" class="booking-manage-finished booking-back">予約変更・キャンセル</button><button type="button" class="booking-finish-close">閉じる</button></div></section>
+      <section class="booking-management" hidden>
+        <p class="booking-help">このページで確認した見本の予約を変更・キャンセルできます。ページを再読み込みすると内容は消去されます。実際の予約の変更・キャンセルは、お電話でお問い合わせください。</p>
+        <p class="booking-management-message" role="status"></p>
+        <div class="booking-management-list"></div>
+        <button type="button" class="booking-sample-create booking-secondary">見本の予約で試す</button>
+      </section>
     </div>`;
   document.body.append(dialog);
   const wizard = dialog.querySelector('.booking-wizard');
@@ -100,7 +106,76 @@
   const error = dialog.querySelector('.booking-error');
   const finished = dialog.querySelector('.booking-finished');
   let state = null;
-  let origin = null;
+  let originControl = null;
+  const management = dialog.querySelector('.booking-management');
+  const records = [];
+  let recordNumber = 0;
+  function showManagement(message = '', pending = null) {
+    state = null;
+    wizard.hidden = true;
+    finished.hidden = true;
+    management.hidden = false;
+    dialog.querySelector('.booking-progress').hidden = true;
+    title.textContent = '予約変更・キャンセル';
+    dialog.querySelector('.booking-management-message').textContent = message;
+    const list = dialog.querySelector('.booking-management-list');
+    list.replaceChildren();
+    if (!records.length) {
+      const empty = document.createElement('p');
+      empty.textContent = '見本の予約はまだありません。新規予約の確認を完了するか、下のボタンからお試しください。';
+      list.append(empty);
+    }
+    records.forEach(record => {
+      const card = document.createElement('article');
+      card.className = 'booking-record';
+      const heading = document.createElement('h3');
+      heading.textContent = `${record.id}（見本）${record.cancelled ? '・キャンセル済み' : ''}`;
+      const summary = document.createElement('p');
+      summary.textContent = `${record.department} ／ ${record.visit}\n${dateLabel(record.selected.date)} ${record.selected.time}`;
+      card.append(heading, summary);
+      if (!record.cancelled) {
+        const actions = document.createElement('div');
+        actions.className = 'booking-actions';
+        const change = document.createElement('button');
+        change.type = 'button';
+        change.className = 'booking-secondary';
+        change.textContent = pending === record ? 'キャンセルせず戻る' : '予約変更';
+        change.addEventListener('click', () => {
+          if (pending === record) { showManagement(); return; }
+          wizard.reset();
+          state = {step: 0, offset: Math.max(0, Math.floor((asDate(record.selected.date) - asDate(tokyoNow().date)) / 86400000 / 7) * 7), selected: null, editing: record};
+          field('department').value = record.department;
+          field('visit').value = record.visit;
+          showStep(0);
+        });
+        const cancel = document.createElement('button');
+        cancel.type = 'button';
+        cancel.className = 'booking-cancel';
+        cancel.textContent = pending === record ? 'キャンセルを確定する（見本）' : '予約キャンセル';
+        cancel.addEventListener('click', () => {
+          if (pending !== record) { showManagement('この見本の予約をキャンセルしますか？', record); return; }
+          record.cancelled = true;
+          showManagement(`${record.id} のキャンセル操作が完了しました（見本）。`);
+        });
+        actions.append(change, cancel);
+        card.append(actions);
+      }
+      list.append(card);
+    });
+    dialog.scrollTop = 0;
+    title.focus({preventScroll: true});
+  }
+  dialog.querySelector('.booking-sample-create').addEventListener('click', () => {
+    const department = departments[0];
+    for (const date of weekDates(7)) {
+      const time = times.find(time => selectable(slotStatus(date, time, department)));
+      if (!time) continue;
+      records.push({id: `DEMO-${++recordNumber}`, department, visit: '再診', selected: {date, time}, cancelled: false});
+      showManagement('変更・キャンセルを試すための見本の予約を用意しました。');
+      break;
+    }
+  });
+  dialog.querySelector('.booking-manage-finished').addEventListener('click', () => showManagement());
   function showError(message) {
     error.textContent = message;
     error.hidden = !message;
@@ -181,7 +256,10 @@
     updateSelection();
   }
   function renderReview() {
-    const values = [
+    const values = state.editing ? [
+      ['予約番号', `${state.editing.id}（見本）`], ['診療科目', field('department').value],
+      ['変更前', `${dateLabel(state.editing.selected.date)} ${state.editing.selected.time}`], ['変更後', selectedText()],
+    ] : [
       ['診療科目', field('department').value], ['受診区分', field('visit').value],
       ['ご予約日時', selectedText()], ['お名前', `${field('family_name').value.trim()} ${field('given_name').value.trim()}`],
       ['フリガナ', `${field('family_kana').value.trim()} ${field('given_kana').value.trim()}`],
@@ -203,14 +281,18 @@
     showError('');
     wizard.hidden = false;
     finished.hidden = true;
+    management.hidden = true;
+    dialog.querySelector('.booking-progress').hidden = false;
     panels.forEach((panel, i) => { panel.hidden = i !== step; });
     progress.forEach((item, i) => {
+      item.hidden = Boolean(state.editing && i === 1);
+      item.querySelector('b').textContent = state.editing && i === 2 ? '2' : String(i + 1);
       if (i === step) item.setAttribute('aria-current', 'step');
       else item.removeAttribute('aria-current');
       item.classList.toggle('is-complete', i < step);
     });
-    title.textContent = ['日時', '予約者情報', '内容の確認'][step];
-    next.textContent = step === 2 ? 'この内容で確認を完了する' : step === 1 ? '確認画面へ' : '次へ';
+    title.textContent = state.editing ? (step === 0 ? '予約日時の変更' : '変更内容の確認') : ['日時', '予約者情報', '内容の確認'][step];
+    next.textContent = step === 2 ? (state.editing ? 'この内容で変更する（見本）' : 'この内容で確認を完了する') : step === 1 ? '確認画面へ' : '次へ';
     next.disabled = step === 0 && !state.selected;
     back.hidden = step === 0;
     if (step === 0) renderWeek();
@@ -231,7 +313,7 @@
         showError('ご希望の日時を空き枠から選択してください。');
         return;
       }
-      showStep(1);
+      showStep(state.editing ? 2 : 1);
     } else if (state.step === 1) {
       for (const input of panels[1].querySelectorAll('input')) {
         input.setCustomValidity(input.required && !input.value.trim() ? '入力してください。' : '');
@@ -249,6 +331,12 @@
         showError('選択した時間が過ぎています。別の日時をお選びください。');
         return;
       }
+      if (state.editing) {
+        state.editing.selected = {...state.selected};
+        showManagement('予約日時の変更操作が完了しました（見本）。');
+        return;
+      }
+      records.push({id: `DEMO-${++recordNumber}`, department: field('department').value, visit: field('visit').value, selected: {...state.selected}, cancelled: false});
       wizard.hidden = true;
       finished.hidden = false;
       title.textContent = '入力内容の確認';
@@ -259,7 +347,7 @@
   wizard.addEventListener('input', (event) => {
     if (typeof event.target.setCustomValidity === 'function') event.target.setCustomValidity('');
   });
-  back.addEventListener('click', () => showStep(Math.max(0, state.step - 1)));
+  back.addEventListener('click', () => showStep(state.editing ? 0 : Math.max(0, state.step - 1)));
   dialog.querySelectorAll('[data-week]').forEach((button) => {
     button.addEventListener('click', () => {
       state.offset = Math.max(0, state.offset + Number(button.dataset.week));
@@ -271,12 +359,25 @@
   dialog.querySelector('.booking-finish-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('close', () => {
     wizard.reset();
-    wizard.querySelectorAll('input').forEach((input) => input.setCustomValidity(''));
+    wizard.querySelectorAll('input').forEach((input) => {
+      input.value = '';
+      input.setCustomValidity('');
+    });
     dialog.querySelector('.booking-review').replaceChildren();
     state = null;
-    origin?.querySelector('button[type="submit"]')?.focus({preventScroll: true});
+    originControl?.focus({preventScroll: true});
   });
   launchForms.forEach((form) => {
+    const manage = document.createElement('button');
+    manage.type = 'button';
+    manage.className = 'booking-launch-manage';
+    manage.textContent = '予約変更・キャンセル';
+    manage.addEventListener('click', () => {
+      originControl = manage;
+      dialog.showModal();
+      showManagement();
+    });
+    form.append(manage);
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const department = form.elements.namedItem('department');
@@ -284,7 +385,7 @@
         department.reportValidity();
         return;
       }
-      origin = form;
+      originControl = form.querySelector('button[type="submit"]');
       state = {step: 0, offset: 0, selected: null};
       field('department').value = department.value;
       field('visit').value = form.elements.namedItem('visit').value;
